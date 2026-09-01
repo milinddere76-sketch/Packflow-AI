@@ -1,0 +1,19 @@
+services:
+  packflow-erp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: packflow-ai-erp
+    ports:
+      - "9000:8000"
+      - "9001:3000"
+      - "9080:8080"
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - PORT=8000
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:8000/api/health', (r) => { if (r.statusCode !== 200) process.exit(1); })"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
