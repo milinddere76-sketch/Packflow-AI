@@ -1,0 +1,9 @@
+{
+  "appId": "com.packflow.erp",
+  "appName": "PackFlow ERP",
+  "webDir": ".",
+  "server": {
+    "url": "http://10.0.2.2:3000",
+    "cleartext": true
+  }
+}
