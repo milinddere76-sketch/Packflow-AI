@@ -3320,12 +3320,26 @@ class PackFlowApp {
         <td>₹${(c.creditLimit || 0).toLocaleString('en-IN')}</td>
         <td style="color:var(--accent-rose); font-weight:700;">₹${(c.outstanding || 0).toLocaleString('en-IN')}</td>
         <td>
-          <button class="btn btn-sm btn-secondary" onclick="window.pdfGenerator ? window.pdfGenerator.generateDocument('Quotation', {customer: '${c.name}'}) : null">
-            📄 Ledger PDF
-          </button>
+          <div style="display:flex; gap:0.35rem;">
+            <button class="btn btn-sm btn-secondary" onclick="window.pdfGenerator ? window.pdfGenerator.generateDocument('Quotation', {customer: '${c.name}'}) : null">
+              📄 Ledger PDF
+            </button>
+            <button class="btn btn-sm btn-danger" onclick="window.app.deleteCustomer('${c.id}')">
+              🗑️
+            </button>
+          </div>
         </td>
       </tr>
     `).join('');
+  }
+
+  deleteCustomer(id) {
+    if (window.appState) {
+      window.appState.state.customers = window.appState.getCustomers().filter(c => c.id !== id);
+      window.appState.saveState();
+      this.showToast(`Customer ${id} removed!`, "info");
+      this.renderCRMTable();
+    }
   }
 
   /* -------------------------------------------------------------------------- */
@@ -3507,11 +3521,12 @@ class PackFlowApp {
             <span class="status-pill ${m.status === 'Running' ? 'success' : m.status === 'Idle' ? 'warning' : 'danger'}">${m.status}</span>
           </div>
           <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-size:0.8rem; color:var(--text-secondary);">Speed:</span>
-            <span class="machine-speed">${m.speedMpm} MPM</span>
+            <span style="font-size:0.8rem; color:var(--text-secondary);">Speed Control:</span>
+            <span class="machine-speed" id="spVal_${m.id}">${m.speedMpm} MPM</span>
           </div>
+          <input type="range" min="0" max="250" value="${m.speedMpm}" style="width:100%; cursor:pointer;" oninput="window.app.updateMachineSpeed('${m.id}', this.value)">
           <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-size:0.8rem; color:var(--text-secondary);">OEE:</span>
+            <span style="font-size:0.8rem; color:var(--text-secondary);">OEE Performance:</span>
             <strong style="color:var(--accent-emerald);">${m.oeePercent}%</strong>
           </div>
           <div class="progress-bar-container">
@@ -3541,10 +3556,24 @@ class PackFlowApp {
     }
   }
 
+  updateMachineSpeed(macId, speed) {
+    if (window.appState) {
+      const m = window.appState.getMachines().find(mac => mac.id === macId);
+      if (m) {
+        m.speedMpm = parseInt(speed) || 0;
+        m.status = m.speedMpm > 0 ? "Running" : "Idle";
+        m.oeePercent = Math.min(98, Math.max(50, Math.round((m.speedMpm / 200) * 100)));
+        window.appState.saveState();
+        const spEl = document.getElementById(`spVal_${macId}`);
+        if (spEl) spEl.innerText = `${m.speedMpm} MPM`;
+      }
+    }
+  }
+
   toggleMachine(macId) {
     if (window.appState) {
       window.appState.toggleMachineStatus(macId);
-      this.showToast(`Machine ${macId} status updated!`, "info");
+      this.showToast(`Machine ${macId} status toggled!`, "info");
       this.renderMRPBoard();
     }
   }
@@ -3629,6 +3658,44 @@ class PackFlowApp {
       if (elProfit) elProfit.innerText = `₹${(summary.grossProfit || 1090000).toLocaleString('en-IN')} (${summary.grossProfitMarginPercent}%)`;
       if (elNet) elNet.innerText = `₹${(summary.netProfit || 862000).toLocaleString('en-IN')}`;
     }
+  }
+
+  downloadGSTR1JSON() {
+    const invoices = window.appState ? window.appState.getInvoices() : [];
+    const jsonStr = JSON.stringify({
+      gstin: "27AAACP1234F1Z9",
+      fp: "082026",
+      b2b: invoices.map(i => ({
+        ctin: i.gstin || "27AAACA4321A1Z8",
+        inv: [{
+          inum: i.invoiceNo,
+          idt: i.date,
+          val: i.totalAmount,
+          pos: "27",
+          rchrg: "N",
+          inv_typ: "R",
+          itms: [{
+            num: 1,
+            itm_det: {
+              txval: i.taxableValue,
+              rt: 18,
+              iamt: 0,
+              camt: i.taxableValue * 0.09,
+              samt: i.taxableValue * 0.09,
+              csamt: 0
+            }
+          }]
+        }]
+      }))
+    }, null, 2);
+
+    const blob = new Blob([jsonStr], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `GSTR1_PackFlow_082026.json`;
+    a.click();
+    this.showToast("GSTR-1 JSON downloaded successfully!", "success");
   }
 
   /* -------------------------------------------------------------------------- */

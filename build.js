@@ -578,6 +578,13 @@ ${jsBundle}
 </body>
 </html>`;
 
+if (!fs.existsSync('public')) {
+  fs.mkdirSync('public', { recursive: true });
+}
+
 fs.writeFileSync('index.html', htmlTemplate);
 fs.writeFileSync('launch.html', htmlTemplate);
-console.log('Build complete! 100% 17-Module Functional Bundle Generated. Size:', htmlTemplate.length);
+fs.writeFileSync('public/index.html', htmlTemplate);
+fs.writeFileSync('public/launch.html', htmlTemplate);
+
+console.log('Build complete! 100% Functional Bundle written to index.html & public/index.html. Size:', htmlTemplate.length);
