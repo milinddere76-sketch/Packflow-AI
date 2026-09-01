@@ -1,0 +1,85 @@
+[
+  {
+    "view": "dashboard",
+    "visible": true,
+    "kpis": true
+  },
+  {
+    "view": "costing",
+    "visible": true,
+    "cad": true
+  },
+  {
+    "view": "crm",
+    "visible": true,
+    "table": true
+  },
+  {
+    "view": "quotations",
+    "visible": true,
+    "table": true
+  },
+  {
+    "view": "sales",
+    "visible": true,
+    "table": true
+  },
+  {
+    "view": "mrp",
+    "visible": true,
+    "machines": true
+  },
+  {
+    "view": "inventory",
+    "visible": true,
+    "table": true
+  },
+  {
+    "view": "purchase",
+    "visible": true
+  },
+  {
+    "view": "warehouse",
+    "visible": true
+  },
+  {
+    "view": "accounting",
+    "visible": true
+  },
+  {
+    "view": "invoices",
+    "visible": true
+  },
+  {
+    "view": "ar",
+    "visible": true
+  },
+  {
+    "view": "ap",
+    "visible": true
+  },
+  {
+    "view": "hr",
+    "visible": true,
+    "table": true
+  },
+  {
+    "view": "users",
+    "visible": true,
+    "table": true,
+    "usersCount": 7,
+    "usersRows": 7
+  },
+  {
+    "view": "qc",
+    "visible": true
+  },
+  {
+    "view": "analytics",
+    "visible": true
+  },
+  {
+    "view": "automation",
+    "visible": true
+  }
+]

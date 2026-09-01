@@ -1,0 +1,4283 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <script>if (typeof window !== 'undefined' && typeof window.scrollTo !== 'function') { window.scrollTo = function(){}; }</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PackFlow AI ERP - Corrugated Packaging Enterprise System</title>
+
+  <!-- Complete Embedded ERP Stylesheet (Zero External Dependencies) -->
+  <style>
+/* PackFlow AI ERP - Modern Corrugated Packaging Design System */
+
+:root {
+  /* Dark Mode Default Theme (Slate & Deep Navy) */
+  --bg-primary: #0b0f19;
+  --bg-secondary: #111827;
+  --bg-tertiary: #1f2937;
+  --bg-card: rgba(17, 24, 39, 0.85);
+  --bg-card-hover: rgba(31, 41, 55, 0.95);
+  
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-focus: #3b82f6;
+  
+  --text-primary: #f9fafb;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  
+  /* Brand Accent Colors */
+  --accent-cyan: #06b6d4;
+  --accent-blue: #3b82f6;
+  --accent-indigo: #6366f1;
+  --accent-purple: #8b5cf6;
+  --accent-emerald: #10b981;
+  --accent-amber: #f59e0b;
+  --accent-rose: #f43f5e;
+  
+  /* Status Colors */
+  --status-success: #10b981;
+  --status-warning: #f59e0b;
+  --status-error: #ef4444;
+  --status-info: #3b82f6;
+  
+  /* Gradients */
+  --grad-primary: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  --grad-accent: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+  --grad-gold: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  --grad-card: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
+  
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  
+  --sidebar-width: 260px;
+  --topbar-height: 64px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.25);
+  
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+}
+
+[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8fafc;
+  
+  --border-color: #e2e8f0;
+  --border-focus: #2563eb;
+  
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 15px rgba(37, 99, 235, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  font-size: 0.875rem;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* App Layout Structure */
+#app {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* Sidebar Navigation */
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  z-index: 40;
+  transition: transform var(--transition-normal);
+  flex-shrink: 0;
+}
+
+.sidebar-header {
+  height: var(--topbar-height);
+  padding: 0 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--grad-primary);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.2rem;
+  box-shadow: var(--shadow-glow);
+}
+
+.logo-text {
+  font-size: 1.15rem;
+  font-weight: 700;
+  background: var(--grad-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.02em;
+}
+
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.nav-section-title {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  font-weight: 700;
+  padding: 0.75rem 0.75rem 0.25rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.nav-item:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.nav-item.active {
+  background: var(--grad-primary);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: var(--shadow-md);
+}
+
+.nav-item i {
+  font-size: 1.1rem;
+  width: 20px;
+  text-align: center;
+}
+
+.nav-badge {
+  margin-left: auto;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.nav-item:not(.active) .nav-badge {
+  background: var(--bg-tertiary);
+  color: var(--accent-blue);
+}
+
+/* User Profile Footer in Sidebar */
+.sidebar-user {
+  padding: 0.85rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.user-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--grad-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.user-info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.user-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.user-role-selector {
+  background: transparent;
+  border: none;
+  color: var(--accent-cyan);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+}
+
+/* Main Area Layout */
+.main-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  min-width: 0;
+}
+
+/* Top Bar */
+.topbar {
+  height: var(--topbar-height);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  z-index: 30;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sidebar-toggle {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: none;
+  padding: 0.35rem;
+  border-radius: var(--radius-sm);
+}
+
+.sidebar-toggle:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.plant-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-tertiary);
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.module-select-dropdown {
+  background: var(--grad-primary);
+  color: #fff;
+  border: none;
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.85rem;
+  outline: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+
+.module-select-dropdown option {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.search-box {
+  position: relative;
+  width: 280px;
+}
+
+.search-box input {
+  width: 100%;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 0.85rem 0.5rem 2.4rem;
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  transition: all var(--transition-fast);
+}
+
+.search-box input:focus {
+  border-color: var(--border-focus);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.search-box i {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.topbar-btn {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: all var(--transition-fast);
+}
+
+.topbar-btn:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+  border-color: var(--border-focus);
+}
+
+.badge-dot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  background: var(--accent-rose);
+  border-radius: 50%;
+}
+
+.ai-assistant-trigger {
+  background: var(--grad-primary);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-glow);
+  transition: transform var(--transition-fast);
+}
+
+.ai-assistant-trigger:hover {
+  transform: translateY(-1px);
+}
+
+/* Page Content Container */
+.content-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  background: var(--bg-primary);
+}
+
+/* Page Headers */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.page-title-group h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.page-title-group p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 0.15rem;
+}
+
+.page-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-tertiary);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Responsive Rules (Mobile & Tablet) */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .sidebar-toggle {
+    display: block;
+  }
+  
+  .search-box {
+    display: none;
+  }
+  
+  .content-area {
+    padding: 1rem;
+  }
+}
+
+
+/* --- END CSS MODULE --- */
+
+/* PackFlow AI ERP - UI Component Styles */
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  line-height: 1.25;
+}
+
+.btn-primary {
+  background: var(--grad-primary);
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  opacity: 0.95;
+  box-shadow: var(--shadow-glow);
+}
+
+.btn-secondary {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-focus);
+}
+
+.btn-success {
+  background: var(--accent-emerald);
+  color: #ffffff;
+}
+
+.btn-success:hover {
+  background: #059669;
+}
+
+.btn-warning {
+  background: var(--accent-amber);
+  color: #ffffff;
+}
+
+.btn-danger {
+  background: var(--accent-rose);
+  color: #ffffff;
+}
+
+.btn-sm {
+  padding: 0.35rem 0.65rem;
+  font-size: 0.775rem;
+  border-radius: var(--radius-sm);
+}
+
+.btn-lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  border-radius: var(--radius-md);
+}
+
+.btn-icon {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: var(--radius-md);
+}
+
+/* KPI Cards */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.kpi-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.kpi-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.kpi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.kpi-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+}
+
+.kpi-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.kpi-icon.cyan { background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan); }
+.kpi-icon.blue { background: rgba(59, 130, 246, 0.15); color: var(--accent-blue); }
+.kpi-icon.indigo { background: rgba(99, 102, 241, 0.15); color: var(--accent-indigo); }
+.kpi-icon.purple { background: rgba(139, 92, 246, 0.15); color: var(--accent-purple); }
+.kpi-icon.emerald { background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); }
+.kpi-icon.amber { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); }
+.kpi-icon.rose { background: rgba(244, 63, 94, 0.15); color: var(--accent-rose); }
+
+.kpi-value {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.kpi-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.65rem;
+  font-size: 0.775rem;
+}
+
+.trend-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+}
+
+.trend-badge.up { background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); }
+.trend-badge.down { background: rgba(244, 63, 94, 0.15); color: var(--accent-rose); }
+
+.kpi-footer-text {
+  color: var(--text-muted);
+}
+
+/* Glass Cards & Containers */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 1.1rem 1.35rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-body {
+  padding: 1.35rem;
+}
+
+/* Tables */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+.data-table th {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.725rem;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.data-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+.data-table tbody tr:hover {
+  background: var(--bg-card-hover);
+}
+
+/* Status Pills */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-pill::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.status-pill.success { background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); }
+.status-pill.warning { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); }
+.status-pill.danger { background: rgba(244, 63, 94, 0.15); color: var(--accent-rose); }
+.status-pill.info { background: rgba(59, 130, 246, 0.15); color: var(--accent-blue); }
+.status-pill.purple { background: rgba(139, 92, 246, 0.15); color: var(--accent-purple); }
+
+/* Form Controls */
+.form-group {
+  margin-bottom: 1.1rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.35rem;
+}
+
+.form-control {
+  width: 100%;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.55rem 0.85rem;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-family: inherit;
+  transition: all var(--transition-fast);
+}
+
+.form-control:focus {
+  border-color: var(--border-focus);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+/* Modals */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-normal);
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-container {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  width: 90%;
+  max-width: 650px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-lg);
+  transform: scale(0.95);
+  transition: transform var(--transition-normal);
+}
+
+.modal-container.lg { max-width: 900px; }
+.modal-container.xl { max-width: 1100px; }
+
+.modal-overlay.open .modal-container {
+  transform: scale(1);
+}
+
+.modal-header {
+  padding: 1.1rem 1.35rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: var(--text-primary);
+}
+
+.modal-body {
+  padding: 1.35rem;
+  overflow-y: auto;
+}
+
+.modal-footer {
+  padding: 1rem 1.35rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Tabs */
+.tab-list {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1.25rem;
+  overflow-x: auto;
+}
+
+.tab-btn {
+  padding: 0.65rem 1rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.tab-btn.active {
+  color: var(--accent-blue);
+  border-bottom-color: var(--accent-blue);
+}
+
+/* AI Assistant Drawer */
+.ai-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 420px;
+  height: 100vh;
+  background: var(--bg-secondary);
+  border-left: 1px solid var(--border-color);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform var(--transition-normal);
+  box-shadow: var(--shadow-lg);
+}
+
+.ai-drawer.open {
+  transform: translateX(0);
+}
+
+.ai-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--grad-card);
+}
+
+.ai-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.chat-bubble {
+  max-width: 85%;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.chat-bubble.user {
+  align-self: flex-end;
+  background: var(--grad-primary);
+  color: #fff;
+  border-bottom-right-radius: 2px;
+}
+
+.chat-bubble.ai {
+  align-self: flex-start;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-bottom-left-radius: 2px;
+}
+
+.ai-input-box {
+  padding: 1rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ai-input-box input {
+  flex: 1;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.55rem 0.85rem;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+}
+
+
+/* --- END CSS MODULE --- */
+
+/* PackFlow AI ERP - High-Density Enterprise Module Styling */
+
+/* Module Sub-Header & Breadcrumb Toolbar */
+.module-toolbar {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 1.1rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.breadcrumb-list {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.breadcrumb-list a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.breadcrumb-list a:hover {
+  color: var(--accent-blue);
+}
+
+.breadcrumb-separator {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+}
+
+.stats-strip {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.stat-item strong {
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+}
+
+/* CAD Packaging Box Studio */
+.box-studio-grid {
+  display: grid;
+  grid-template-columns: 340px 1fr 360px;
+  gap: 1.25rem;
+}
+
+@media (max-width: 1300px) {
+  .box-studio-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cad-box-container {
+  background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
+}
+
+.cad-svg-box {
+  width: 100%;
+  height: 240px;
+}
+
+.flute-wave-svg {
+  width: 100%;
+  height: 90px;
+  background: #0f172a;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  margin-top: 0.5rem;
+}
+
+.deckle-cut-diagram {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+  margin-top: 0.85rem;
+}
+
+.reel-roll-visual {
+  height: 36px;
+  background: linear-gradient(90deg, #d97706 0%, #f59e0b 80%, #ef4444 80%, #ef4444 100%);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.85rem;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.775rem;
+  font-family: var(--font-mono);
+}
+
+/* Charts Container */
+.chart-card-container {
+  position: relative;
+  height: 280px;
+  width: 100%;
+}
+
+/* ERP Enterprise Data Grid Enhancements */
+.data-table-toolbar {
+  padding: 0.85rem 1.1rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(0, 0, 0, 0.08);
+  gap: 1rem;
+}
+
+.table-search-input {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.4rem 0.75rem 0.4rem 2rem;
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  width: 240px;
+}
+
+.table-pagination {
+  padding: 0.75rem 1.1rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.775rem;
+  color: var(--text-muted);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.pagination-btn-group {
+  display: flex;
+  gap: 0.35rem;
+}
+
+/* Invoice Paper Standard Layout */
+.invoice-paper {
+  background: #ffffff;
+  color: #0f172a;
+  padding: 2.5rem;
+  border-radius: var(--radius-md);
+  max-width: 820px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-lg);
+  font-family: 'Inter', var(--font-family);
+}
+
+.invoice-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.company-branding h2 {
+  font-size: 1.5rem;
+  color: #0f172a;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.invoice-table th {
+  background: #f1f5f9;
+  color: #475569;
+  padding: 0.65rem;
+  font-size: 0.775rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid #cbd5e1;
+}
+
+.invoice-table td {
+  padding: 0.65rem;
+  border: 1px solid #e2e8f0;
+  font-size: 0.85rem;
+}
+
+/* Print Rules */
+@media print {
+  body * { visibility: hidden; }
+  .invoice-paper, .invoice-paper * { visibility: visible; }
+  .invoice-paper { position: absolute; left: 0; top: 0; width: 100%; box-shadow: none; }
+}
+
+  </style>
+
+  <!-- Instant Inline Global Handlers (Zero-Dependency) -->
+  <script>
+    window.navigateTo = function(viewId) {
+      try {
+        var navItems = document.querySelectorAll("#sidebarNav .nav-item");
+        for (var i = 0; i < navItems.length; i++) {
+          var item = navItems[i];
+          if (item.getAttribute("data-view") === viewId) {
+            item.classList.add("active");
+          } else {
+            item.classList.remove("active");
+          }
+        }
+
+        var topSelector = document.getElementById("topbarModuleSelector");
+        if (topSelector) topSelector.value = viewId;
+
+        var panels = document.querySelectorAll(".erp-view-panel");
+        var targetFound = false;
+        for (var j = 0; j < panels.length; j++) {
+          var panel = panels[j];
+          if (panel.id === "view-" + viewId) {
+            panel.style.display = "block";
+            targetFound = true;
+          } else {
+            panel.style.display = "none";
+          }
+        }
+
+        if (!targetFound && panels.length > 0) {
+          var dash = document.getElementById("view-dashboard");
+          if (dash) dash.style.display = "block";
+        }
+
+        if (window.app) {
+          window.app.currentView = viewId;
+          if (typeof window.app.refreshModuleView === "function") window.app.refreshModuleView(viewId);
+        }
+
+        try { if (typeof window.scrollTo === 'function') window.scrollTo(0, 0); } catch(e) {}
+      } catch (err) {
+        console.error("navigateTo error:", err);
+      }
+    };
+
+    window.convertCostingToQuotation = function() {
+      if (window.app && typeof window.app.convertCostingToQuotation === "function") {
+        window.app.convertCostingToQuotation();
+      }
+    };
+
+    window.showAddCustomerModal = function() {
+      if (window.app && typeof window.app.showAddCustomerModal === "function") window.app.showAddCustomerModal();
+    };
+    window.showAddReelModal = function() {
+      if (window.app && typeof window.app.showAddReelModal === "function") window.app.showAddReelModal();
+    };
+    window.showAddPOModal = function() {
+      if (window.app && typeof window.app.showAddPOModal === "function") window.app.showAddPOModal();
+    };
+    window.showAddReceiptModal = function() {
+      if (window.app && typeof window.app.showAddReceiptModal === "function") window.app.showAddReceiptModal();
+    };
+    window.showAddEmployeeModal = function() {
+      if (window.app && typeof window.app.showAddEmployeeModal === "function") window.app.showAddEmployeeModal();
+    };
+    window.showAddUserModal = function() {
+      if (window.app && typeof window.app.showAddUserModal === "function") window.app.showAddUserModal();
+    };
+    window.showAddQCModal = function() {
+      if (window.app && typeof window.app.showAddQCModal === "function") window.app.showAddQCModal();
+    };
+    window.showAddRuleModal = function() {
+      if (window.app && typeof window.app.showAddRuleModal === "function") window.app.showAddRuleModal();
+    };
+  </script>
+</head>
+<body>
+  <div id="app">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">P</div>
+        <div class="logo-text">PackFlow AI ERP</div>
+      </div>
+
+      <div class="sidebar-nav" id="sidebarNav">
+        <div class="nav-section-title">Enterprise ERP Modules</div>
+        <div class="nav-item active" data-view="dashboard" onclick="window.navigateTo('dashboard')">
+          <i>📊</i> <span>Executive Dashboard</span>
+        </div>
+        <div class="nav-item" data-view="crm" onclick="window.navigateTo('crm')">
+          <i>👥</i> <span>CRM & Customers</span> <span class="nav-badge">4</span>
+        </div>
+        <div class="nav-item" data-view="quotations" onclick="window.navigateTo('quotations')">
+          <i>📝</i> <span>AI Quotation System</span> <span class="nav-badge">2</span>
+        </div>
+        <div class="nav-item" data-view="costing" onclick="window.navigateTo('costing')">
+          <i>📦</i> <span>Corrugated Box Costing</span> <span class="nav-badge">CAD Studio</span>
+        </div>
+        <div class="nav-item" data-view="sales" onclick="window.navigateTo('sales')">
+          <i>🛒</i> <span>Sales Orders</span> <span class="nav-badge">2</span>
+        </div>
+        <div class="nav-item" data-view="mrp" onclick="window.navigateTo('mrp')">
+          <i>⚙️</i> <span>Production Planning (MRP)</span> <span class="nav-badge">2</span>
+        </div>
+        <div class="nav-item" data-view="inventory" onclick="window.navigateTo('inventory')">
+          <i>📜</i> <span>Raw Paper Inventory</span> <span class="nav-badge">5</span>
+        </div>
+        <div class="nav-item" data-view="purchase" onclick="window.navigateTo('purchase')">
+          <i>🛍️</i> <span>Purchase & Vendors</span> <span class="nav-badge">2</span>
+        </div>
+        <div class="nav-item" data-view="warehouse" onclick="window.navigateTo('warehouse')">
+          <i>🚚</i> <span>Warehouse & Dispatch</span> <span class="nav-badge">1</span>
+        </div>
+        <div class="nav-item" data-view="accounting" onclick="window.navigateTo('accounting')">
+          <i>🏛️</i> <span>GST Accounting (India)</span> <span class="nav-badge">GSTR-1</span>
+        </div>
+        <div class="nav-item" data-view="invoices" onclick="window.navigateTo('invoices')">
+          <i>🧾</i> <span>Tax Invoicing System</span> <span class="nav-badge">2</span>
+        </div>
+        <div class="nav-item" data-view="ar" onclick="window.navigateTo('ar')">
+          <i>💰</i> <span>Accounts Receivable</span> <span class="nav-badge">₹8.4L</span>
+        </div>
+        <div class="nav-item" data-view="ap" onclick="window.navigateTo('ap')">
+          <i>💳</i> <span>Accounts Payable</span> <span class="nav-badge">2</span>
+        </div>
+        <div class="nav-item" data-view="hr" onclick="window.navigateTo('hr')">
+          <i>👔</i> <span>HR & Payroll</span> <span class="nav-badge">4</span>
+        </div>
+        <div class="nav-item" data-view="users" onclick="window.navigateTo('users')">
+          <i>🧑‍💻</i> <span>System Users</span>
+        </div>
+        <div class="nav-item" data-view="qc" onclick="window.navigateTo('qc')">
+          <i>🔬</i> <span>Quality Control (QC)</span> <span class="nav-badge">2</span>
+        </div>
+        <div class="nav-item" data-view="analytics" onclick="window.navigateTo('analytics')">
+          <i>📈</i> <span>AI Reports & Analytics</span>
+        </div>
+        <div class="nav-item" data-view="automation" onclick="window.navigateTo('automation')">
+          <i>⚡</i> <span>Automation Rules Matrix</span> <span class="nav-badge">3</span>
+        </div>
+      </div>
+
+      <div class="sidebar-user">
+        <div class="user-avatar" id="userAvatar">RS</div>
+        <div class="user-info">
+          <div class="user-name">Rajesh Sharma</div>
+          <select class="user-role-selector" id="roleSelect">
+            <option value="Super Admin">Role: Super Admin</option>
+            <option value="Director">Role: Director</option>
+            <option value="Sales Manager">Role: Sales Manager</option>
+            <option value="Production Manager">Role: Production Manager</option>
+            <option value="Accountant">Role: Accountant</option>
+            <option value="Quality Inspector">Role: Quality Inspector</option>
+            <option value="Dispatch Executive">Role: Dispatch Executive</option>
+          </select>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:6px; margin-left:8px;">
+          <button class="btn btn-sm btn-secondary" id="btnAddUser" onclick="window.showAddUserModal ? window.showAddUserModal() : null">Add User</button>
+          <button class="btn btn-sm btn-secondary" id="btnCompanyProfile" onclick="window.showAddCompanyModal ? window.showAddCompanyModal() : null">New Company</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Wrapper -->
+    <main class="main-wrapper">
+      <!-- Topbar Header -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="sidebar-toggle" id="mobileMenuToggle">
+            <i>≡</i>
+          </button>
+
+          <!-- Topbar Quick Module Dropdown -->
+          <select class="module-select-dropdown" id="topbarModuleSelector" onchange="window.navigateTo(this.value)">
+            <option value="dashboard" selected>📊 Executive Dashboard</option>
+            <option value="costing">📦 Corrugated Box Costing (CAD)</option>
+            <option value="crm">👥 CRM & Customer Database</option>
+            <option value="quotations">📝 AI Quotations System</option>
+            <option value="sales">🛒 Sales Orders</option>
+            <option value="mrp">⚙️ Production Planning (MRP)</option>
+            <option value="inventory">📜 Raw Paper Inventory</option>
+            <option value="purchase">🛍️ Purchase & Vendors</option>
+            <option value="warehouse">🚚 Warehouse & Dispatch</option>
+            <option value="accounting">🏛️ GST Accounting (India)</option>
+            <option value="invoices">🧾 Tax Invoicing System</option>
+            <option value="ar">💰 Accounts Receivable (AR)</option>
+            <option value="ap">💳 Accounts Payable (AP)</option>
+            <option value="hr">👔 HR & Payroll</option>
+            <option value="qc">🔬 Quality Control (QC)</option>
+            <option value="analytics">📈 AI Reports & Analytics</option>
+            <option value="automation">⚡ Automation Rules Matrix</option>
+            <option value="users">🧑‍💻 System Users</option>
+          </select>
+          
+          <div class="plant-badge">
+            <i style="color: var(--accent-cyan);">🏢</i>
+            <select id="plantSelect" style="background: transparent; border: none; color: inherit; font-size: inherit; outline: none; cursor: pointer;">
+              <option value="P1">Plant 1 - Pune Mega Unit</option>
+              <option value="P2">Plant 2 - Gujarat Unit</option>
+            </select>
+          </div>
+
+          <div class="search-box">
+            <i>🔍</i>
+            <input type="text" id="globalSearchInput" placeholder="Search orders, boxes, GSTIN, paper reels...">
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <button class="ai-assistant-trigger" id="aiTriggerBtn">
+            <i>✨</i>
+            <span>BoxBrain AI</span>
+          </button>
+
+          <button class="topbar-btn" title="System Notifications">
+            <i>🔔</i>
+            <span class="badge-dot"></span>
+          </button>
+
+          <button class="topbar-btn" onclick="document.documentElement.getAttribute('data-theme') === 'dark' ? document.documentElement.setAttribute('data-theme', 'light') : document.documentElement.setAttribute('data-theme', 'dark')" title="Toggle Theme">
+            <i>☀️</i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Page Content Display (Pre-Rendered View Panels) -->
+      <section class="content-area" id="mainContent">
+        
+        <!-- PANEL 1: DASHBOARD -->
+        <div id="view-dashboard" class="erp-view-panel">
+          <div class="module-toolbar">
+            <div class="breadcrumb-list">
+              <a href="#" onclick="window.navigateTo('dashboard'); return false;">PackFlow ERP</a>
+              <span class="breadcrumb-separator">/</span>
+              <span style="color:var(--text-primary); font-weight:600;">Executive Dashboard</span>
+            </div>
+            <div class="stats-strip">
+              <div class="stat-item"><span style="color:var(--text-muted);">Active Plant:</span> <strong>Plant 1 (Pune)</strong></div>
+              <div class="stat-item"><span style="color:var(--text-muted);">Financial Year:</span> <strong>2026-2027</strong></div>
+              <div class="stat-item"><span style="color:var(--text-muted);">GSTIN:</span> <strong>27AAACP1234F1Z9</strong></div>
+            </div>
+          </div>
+
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>Executive Operations Dashboard</h1>
+              <p>Real-time factory metrics, revenue performance, and shop floor corrugation OEE.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-secondary" onclick="window.pdfGenerator ? window.pdfGenerator.generateDocument('Invoice', {}) : null"><i>🖨️</i> Export Daily PDF Report</button>
+              <button class="btn btn-primary" onclick="window.navigateTo('costing')"><i>➕</i> New Box Costing</button>
+            </div>
+          </div>
+
+          <div class="kpi-grid">
+            <div class="kpi-card" onclick="window.navigateTo('invoices')" style="cursor:pointer;">
+              <div class="kpi-header"><span class="kpi-title">Monthly Sales Revenue</span><div class="kpi-icon blue"><i>💰</i></div></div>
+              <div class="kpi-value">₹28.50 Lakhs</div>
+              <div class="kpi-footer"><span class="trend-badge up">▲ +14.2%</span><span class="kpi-footer-text">Target: ₹25.0L</span></div>
+            </div>
+            <div class="kpi-card" onclick="window.navigateTo('ar')" style="cursor:pointer;">
+              <div class="kpi-header"><span class="kpi-title">Customer Outstanding</span><div class="kpi-icon rose"><i>💳</i></div></div>
+              <div class="kpi-value">₹27.35 Lakhs</div>
+              <div class="kpi-footer"><span class="trend-badge down">⏱️ 4 Debtors</span><span class="kpi-footer-text">> 30 Days</span></div>
+            </div>
+            <div class="kpi-card" onclick="window.navigateTo('mrp')" style="cursor:pointer;">
+              <div class="kpi-header"><span class="kpi-title">Corrugator Line OEE</span><div class="kpi-icon emerald"><i>⚡</i></div></div>
+              <div class="kpi-value">88.5%</div>
+              <div class="kpi-footer"><span class="trend-badge up">✓ Optimal</span><span class="kpi-footer-text">145 MPM</span></div>
+            </div>
+            <div class="kpi-card" onclick="window.navigateTo('inventory')" style="cursor:pointer;">
+              <div class="kpi-header"><span class="kpi-title">Raw Paper Inventory</span><div class="kpi-icon amber"><i>📜</i></div></div>
+              <div class="kpi-value" id="dashReelValue">4.43 Tonnes</div>
+              <div class="kpi-footer"><span class="trend-badge up">ℹ️ Kraft Reels</span><span class="kpi-footer-text">FIFO Stock</span></div>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 2fr 1fr; gap: 1rem; margin-top: 1rem;">
+            <div class="card">
+              <div class="card-header"><div class="card-title">📈 Financial Revenue & COGS Trend</div></div>
+              <div class="card-body">
+                <svg viewBox="0 0 500 150" style="width:100%; height:150px;">
+                  <polyline points="20,130 90,90 160,110 230,60 300,75 370,40 440,20" fill="none" stroke="#3b82f6" stroke-width="3"/>
+                  <polyline points="20,140 90,115 160,125 230,85 300,95 370,65 440,50" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="4"/>
+                  <circle cx="440" cy="20" r="5" fill="#3b82f6"/>
+                  <text x="445" y="25" fill="#9ca3af" font-size="10">₹28.5L Revenue</text>
+                </svg>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header"><div class="card-title">⚡ Shop Floor Machine Status</div></div>
+              <div class="card-body">
+                <div style="display:flex; flex-direction:column; gap:0.75rem; font-size:0.85rem;">
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span>5-Ply Corrugator Line 1</span>
+                    <span class="status-pill success">145 MPM</span>
+                  </div>
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span>Flexo Printer Slotter 1</span>
+                    <span class="status-pill success">180 BPM</span>
+                  </div>
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span>Automatic Folder Gluer</span>
+                    <span class="status-pill warning">Setup</span>
+                  </div>
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span>Rotary Die Cutter 2</span>
+                    <span class="status-pill success">210 BPM</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 2: CRM & CUSTOMERS -->
+        <div id="view-crm" class="erp-view-panel" style="display:none;">
+          <div class="module-toolbar">
+            <div class="breadcrumb-list"><a href="#" onclick="window.navigateTo('dashboard'); return false;">PackFlow ERP</a> / <span style="color:var(--text-primary); font-weight:600;">CRM & Customers</span></div>
+          </div>
+          <div class="page-header">
+            <div class="page-title-group"><h1>CRM & Customer Management</h1><p>GSTIN auto-validation, credit terms, and customer ledger statements.</p></div>
+            <div class="page-actions"><button class="btn btn-primary" onclick="window.showAddCustomerModal()"><i>👤</i> Add New Customer</button></div>
+          </div>
+          <div class="card">
+            <div class="card-body" style="padding:0;">
+              <table class="data-table">
+                <thead><tr><th>Customer ID</th><th>Company Name</th><th>GSTIN</th><th>Location</th><th>Contact Person</th><th>Credit Limit</th><th>Outstanding</th><th>Action</th></tr></thead>
+                <tbody id="crmTableBody">
+                  <tr><td><strong>CUST-1001</strong></td><td>Amazon Seller Services India Pvt Ltd</td><td><span class="reel-badge">27AAACA4321A1Z8</span></td><td>Mumbai, MH</td><td>Rahul Sharma<br><small style="color:var(--text-muted);">+91 98200 12345</small></td><td>₹50,000,000</td><td style="color:var(--accent-rose); font-weight:700;">₹1,850,000</td><td><button class="btn btn-sm btn-secondary">Ledger PDF</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 3: BOX COSTING CAD STUDIO -->
+        <div id="view-costing" class="erp-view-panel" style="display:none;">
+          <div class="module-toolbar">
+            <div class="breadcrumb-list"><a href="#" onclick="window.navigateTo('dashboard'); return false;">PackFlow ERP</a> / <span style="color:var(--text-primary); font-weight:600;">Box Costing CAD Studio</span></div>
+          </div>
+          <div class="page-header">
+            <div class="page-title-group"><h1>Corrugated Box Costing Engineering & CAD Studio</h1><p>Real-time sheet sizing, 3D CAD wireframe, deckle optimization, and profit calculation.</p></div>
+            <div class="page-actions">
+              <button class="btn btn-primary" id="btnSaveQuotation" onclick="window.convertCostingToQuotation(); return false;"><i>📝</i> Convert to Quotation</button>
+            </div>
+          </div>
+          <div class="box-studio-grid">
+            <div class="card">
+              <div class="card-header"><div class="card-title">📐 Box Specifications</div></div>
+              <div class="card-body">
+                <div class="form-group"><label class="form-label">FEFCO Box Style</label><select class="form-control" id="costFefco"><option value="FEFCO 0201">FEFCO 0201 (RSC Slotted Box)</option><option value="FEFCO 0200">FEFCO 0200 (HSC Open Top)</option><option value="FEFCO 0427">FEFCO 0427 (Die-Cut Mailer)</option></select></div>
+                <div class="form-group"><label class="form-label">Box Dimensions L × W × H (mm)</label><div style="display:flex; gap:0.5rem;"><input type="number" class="form-control" id="costLength" value="300" placeholder="Length"><input type="number" class="form-control" id="costWidth" value="200" placeholder="Width"><input type="number" class="form-control" id="costHeight" value="150" placeholder="Height"></div></div>
+                <div class="form-group"><label class="form-label">Ply Selection</label><select class="form-control" id="costPly"><option value="3">3-Ply Single Wall</option><option value="5" selected>5-Ply Double Wall</option><option value="7">7-Ply Heavy Duty</option></select></div>
+                
+                <div class="form-group">
+                  <label class="form-label">Paper Layer GSM & BF</label>
+                  <div style="display:flex; flex-direction:column; gap:0.35rem;">
+                    <div style="display:flex; gap:0.5rem; align-items:center;"><span style="font-size:0.75rem; width:70px;">Top Liner:</span><input type="number" class="form-control" id="gsm0" value="180" placeholder="GSM"><input type="number" class="form-control" id="bf0" value="24" placeholder="BF"></div>
+                    <div style="display:flex; gap:0.5rem; align-items:center;"><span style="font-size:0.75rem; width:70px;">Flute 1:</span><input type="number" class="form-control" id="gsm1" value="140" placeholder="GSM"><input type="number" class="form-control" id="bf1" value="22" placeholder="BF"></div>
+                    <div style="display:flex; gap:0.5rem; align-items:center;"><span style="font-size:0.75rem; width:70px;">Mid Liner:</span><input type="number" class="form-control" id="gsm2" value="140" placeholder="GSM"><input type="number" class="form-control" id="bf2" value="22" placeholder="BF"></div>
+                    <div style="display:flex; gap:0.5rem; align-items:center;"><span style="font-size:0.75rem; width:70px;">Flute 2:</span><input type="number" class="form-control" id="gsm3" value="140" placeholder="GSM"><input type="number" class="form-control" id="bf3" value="22" placeholder="BF"></div>
+                    <div style="display:flex; gap:0.5rem; align-items:center;"><span style="font-size:0.75rem; width:70px;">Inner Liner:</span><input type="number" class="form-control" id="gsm4" value="140" placeholder="GSM"><input type="number" class="form-control" id="bf4" value="22" placeholder="BF"></div>
+                  </div>
+                </div>
+
+                <div class="form-group"><label class="form-label">Order Quantity & Margin %</label><div style="display:flex; gap:0.5rem;"><input type="number" class="form-control" id="costQty" value="5000" placeholder="Qty"><input type="number" class="form-control" id="costMargin" value="18" placeholder="Margin %"></div></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header"><div class="card-title">🎨 3D Wireframe & Flute Wave Studio</div></div>
+              <div class="card-body">
+                <div class="cad-box-container" id="cadBoxContainer"></div>
+                <div style="margin-top: 1rem;"><h4 style="font-size:0.8rem; font-weight:700; color:var(--text-secondary);">Flute Layer Cross-Section</h4><div id="fluteWaveContainer"></div></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header"><div class="card-title">💰 Costing Summary</div></div>
+              <div class="card-body">
+                <div style="display:flex; flex-direction:column; gap:0.75rem; font-size:0.85rem;">
+                  <div style="display:flex; justify-content:space-between;"><span>Sheet Cut Size:</span><strong id="outSheetSize">1040 × 350 mm</strong></div>
+                  <div style="display:flex; justify-content:space-between;"><span>Optimum Reel (Deckle):</span><strong id="outDeckle">44 Inches (2.1% trim)</strong></div>
+                  <div style="display:flex; justify-content:space-between;"><span>Box Weight:</span><strong id="outWeight">0.342 kg</strong></div>
+                  <div style="display:flex; justify-content:space-between;"><span>Bursting Strength:</span><strong id="outBS">15.8 kg/cm²</strong></div>
+                  <hr style="border:none; border-top:1px solid var(--border-color);">
+                  <div style="display:flex; justify-content:space-between;"><span>Raw Paper Cost:</span><span id="outPaperCost">₹22.45</span></div>
+                  <div style="display:flex; justify-content:space-between;"><span>Conversion & Overheads:</span><span id="outConversion">₹6.15</span></div>
+                  <div style="display:flex; justify-content:space-between; font-weight:700;"><span>Total Cost Price / Box:</span><span id="outCostPrice" style="color:var(--accent-amber);">₹28.60</span></div>
+                  <div style="display:flex; justify-content:space-between; font-size:1.1rem; font-weight:800; border-top:2px solid var(--border-color); padding-top:0.5rem;"><span>Selling Price / Box:</span><span id="outSellingPrice" style="color:var(--accent-emerald);">₹33.75</span></div>
+                  <div style="display:flex; justify-content:space-between; color:var(--text-muted); font-size:0.8rem;"><span>Grand Total (18% GST):</span><span id="outGrandTotal">₹39.82</span></div>
+                  <div style="background:var(--bg-tertiary); padding:0.75rem; border-radius:var(--radius-md); text-align:center;"><div style="font-size:0.75rem; color:var(--text-secondary);">Total Order Profit</div><div style="font-size:1.25rem; font-weight:800; color:var(--accent-cyan);" id="outTotalProfit">₹25,750</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 4: QUOTATIONS -->
+        <div id="view-quotations" class="erp-view-panel" style="display:none;">
+          <div class="module-toolbar"><div class="breadcrumb-list"><a href="#" onclick="window.navigateTo('dashboard'); return false;">PackFlow ERP</a> / <span style="color:var(--text-primary); font-weight:600;">AI Quotations</span></div></div>
+          <div class="page-header"><div class="page-title-group"><h1>AI Quotation Management</h1><p>Quotation creation, box formulas, and instant conversion to Sales Orders.</p></div><div class="page-actions"><button class="btn btn-primary" onclick="window.navigateTo('costing')"><i>📦</i> Open Costing Calculator</button></div></div>
+          <div class="card"><div class="card-body" style="padding:0;"><table class="data-table"><thead><tr><th>Quotation Ref</th><th>Date</th><th>Customer</th><th>Box Specs</th><th>Qty</th><th>Grand Total</th><th>Status</th><th>Action</th></tr></thead><tbody id="quotationsTableBody"></tbody></table></div></div>
+        </div>
+
+        <!-- PANEL 5: SALES ORDERS -->
+        <div id="view-sales" class="erp-view-panel" style="display:none;">
+          <div class="module-toolbar"><div class="breadcrumb-list"><a href="#" onclick="window.navigateTo('dashboard'); return false;">PackFlow ERP</a> / <span style="color:var(--text-primary); font-weight:600;">Sales Orders</span></div></div>
+          <div class="page-header"><div class="page-title-group"><h1>Sales Orders Pipeline</h1><p>Order tracking: Quotation → Sales Order → Production → Dispatch → Invoice.</p></div></div>
+          <div class="card"><div class="card-body" style="padding:0;"><table class="data-table"><thead><tr><th>SO Ref</th><th>Date</th><th>Customer</th><th>PO Number</th><th>Box Description</th><th>Ordered</th><th>Pending</th><th>Status</th></tr></thead><tbody id="salesTableBody"></tbody></table></div></div>
+        </div>
+
+        <!-- PANEL 6: PRODUCTION PLANNING MRP -->
+        <div id="view-mrp" class="erp-view-panel" style="display:none;">
+          <div class="module-toolbar"><div class="breadcrumb-list"><a href="#" onclick="window.navigateTo('dashboard'); return false;">PackFlow ERP</a> / <span style="color:var(--text-primary); font-weight:600;">Production Planning (MRP)</span></div></div>
+          <div class="page-header"><div class="page-title-group"><h1>Production Planning & MRP Shop Floor Board</h1><p>Live corrugation machines, job scheduling, OEE monitoring, and scrap logging.</p></div></div>
+          
+          <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.75rem; color:var(--text-primary);">⚡ Corrugation Shop Floor Machines</h3>
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin-bottom:1.5rem;" id="mrpMachineGrid"></div>
+
+          <div class="card"><div class="card-header"><div class="card-title">⚙️ Active Production Job Cards Execution</div></div><div class="card-body" style="padding:0;"><table class="data-table"><thead><tr><th>Job ID</th><th>SO Ref</th><th>Customer</th><th>Sheet Cut Size</th><th>Deckle Used</th><th>Target Qty</th><th>Produced</th><th>Status</th><th>Action</th></tr></thead><tbody id="mrpJobTableBody"></tbody></table></div></div>
+        </div>
+
+        <!-- PANEL 7: RAW PAPER INVENTORY -->
+        <div id="view-inventory" class="erp-view-panel" style="display:none;">
+          <div class="module-toolbar"><div class="breadcrumb-list"><a href="#" onclick="window.navigateTo('dashboard'); return false;">PackFlow ERP</a> / <span style="color:var(--text-primary); font-weight:600;">Raw Paper Inventory</span></div></div>
+          <div class="page-header"><div class="page-title-group"><h1>Raw Material Paper Inventory (Kraft Reels)</h1><p>Track paper reels by Reel ID, GSM, BF, Deckle width, Weight, and FIFO reorder alerts.</p></div><div class="page-actions"><button class="btn btn-primary" onclick="window.showAddReelModal()"><i>📜</i> Add Kraft Reel Stock</button></div></div>
+          <div class="card"><div class="card-body" style="padding:0;"><table class="data-table"><thead><tr><th>Reel ID</th><th>GSM</th><th>Burst Factor</th><th>Deckle Width</th><th>Net Weight</th><th>Supplier</th><th>Cost Rate</th></tr></thead><tbody id="inventoryTableBody"></tbody></table></div></div>
+        </div>
+
+        <!-- PANEL 8: PURCHASE & VENDORS -->
+        <div id="view-purchase" class="erp-view-panel" style="display:none;">
+          <div class="module-toolbar"><div class="breadcrumb-list"><a href="#" onclick="window.navigateTo('dashboard'); return false;">PackFlow ERP</a> / <span style="color:var(--text-primary); font-weight:600;">Purchase & Vendors</span></div></div>
+          <div class="page-header"><div class="page-title-group"><h1>Purchase & Vendor Management</h1><p>Purchase requisitions, vendor PO release, and GRN paper receipts.</p></div><div class="page-actions"><button class="btn btn-primary" onclick="window.showAddPOModal()"><i>🛍️</i> Create Purchase Order</button></div></div>
+          <div class="card"><div class="card-body" style="padding:0;"><table class="data-table"><thead><tr><th>PO Ref</th><th>Date</th><th>Vendor Supplier</th><th>Items Description</th><th>Amount</th><th>Status</th></tr></thead><tbody id="purchaseTableBody"></tbody></table></div></div>
+        </div>
+
+        <!-- PANEL 9: WAREHOUSE & DISPATCH -->
+        <div id="view-warehouse" class="erp-view-panel" style="display:none;">
+          <div class="module-toolbar"><div class="breadcrumb-list"><a href="#" onclick="window.navigateTo('dashboard'); return false;">PackFlow ERP</a> / <span style="color:var(--text-primary); font-weight:600;">Warehouse & Dispatch</span></div></div>
+          <div class="page-header"><div class="page-title-group"><h1>Warehouse & Dispatch Management</h1><p>Finished goods inventory, loading challans, and E-Way bills.</p></div></div>
+          <div class="card"><div class="card-body" style="padding:0;"><table class="data-table"><thead><tr><th>Dispatch Ref</th><th>Date</th><th>Customer Name</th><th>Items</th><th>Vehicle No</th><th>E-Way Bill</th><th>Status</th></tr></thead><tbody id="warehouseTableBody"></tbody></table></div></div>
+        </div>
+
+        <!-- PANEL 10: GST ACCOUNTING -->
+        <div id="view-accounting" class="erp-view-panel" style="display:none;">
+          <div class="module-toolbar"><div class="breadcrumb-list"><a href="#" onclick="window.navigateTo('dashboard'); return false;">PackFlow ERP</a> / <span style="color:var(--text-primary); font-weight:600;">GST Accounting (India)</span></div></div>
+          <div class="page-header"><div class="page-title-group"><h1>GST Compliant Double-Entry Accounting (India)</h1><p>Real-time ledgers, Profit & Loss statement, and monthly GSTR-1 summaries.</p></div></div>
+          <div class="card"><div class="card-body"><table class="data-table"><tr><td>Gross Sales Revenue:</td><td style="text-align:right; font-weight:700;" id="accRevenue">₹2,850,000</td></tr><tr><td>Cost of Goods Sold (Paper + Power):</td><td style="text-align:right; color:var(--accent-rose);" id="accCogs">₹1,760,000</td></tr><tr style="background:var(--bg-tertiary);"><td>Gross Operating Profit:</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="accProfit">₹1,090,000 (38.2%)</td></tr><tr style="border-top:2px solid var(--border-color);"><td><strong>Net Profit Before Tax:</strong></td><td style="text-align:right; font-weight:800; color:var(--accent-cyan);" id="accNet"><strong>₹862,000</strong></td></tr></table></div></div>
+        </div>
+
+        <!-- PANEL 11: TAX INVOICING -->
+        <div id="view-invoices" class="erp-view-panel" style="display:none;">
+          <div class="module-toolbar"><div class="breadcrumb-list"><a href="#" onclick="window.navigateTo('dashboard'); return false;">PackFlow ERP</a> / <span style="color:var(--text-primary); font-weight:600;">Tax Invoicing System</span></div></div>
+          <div class="page-header"><div class="page-title-group"><h1>GST Tax Invoicing System</h1><p>GST-compliant tax invoices with HSN codes, QR placeholders, and printable PDFs.</p></div></div>
+          <div class="card"><div class="card-body" style="padding:0;"><table class="data-table"><thead><tr><th>Invoice No</th><th>Date</th><th>Customer Name</th><th>GSTIN</th><th>HSN Code</th><th>Taxable Value</th><th>Total Amount</th><th>Action</th></tr></thead><tbody id="invoicesTableBody"></tbody></table></div></div>
+        </div>
+
+        <!-- PANEL 12: ACCOUNTS RECEIVABLE AR -->
+        <div id="view-ar" class="erp-view-panel" style="display:none;">
+          <div class="module-toolbar"><div class="breadcrumb-list"><a href="#" onclick="window.navigateTo('dashboard'); return false;">PackFlow ERP</a> / <span style="color:var(--text-primary); font-weight:600;">Accounts Receivable</span></div></div>
+          <div class="page-header"><div class="page-title-group"><h1>Accounts Receivable (Customer Debtors & Aging)</h1><p>Track customer outstanding payments and record payment receipts.</p></div><div class="page-actions"><button class="btn btn-primary" onclick="window.showAddReceiptModal()"><i>💰</i> Record Payment Receipt</button></div></div>
+          <div class="card"><div class="card-body" style="padding:0;"><table class="data-table"><thead><tr><th>Receipt Ref</th><th>Date</th><th>Customer</th><th>Invoice Ref</th><th>Mode</th><th>Amount Received</th></tr></thead><tbody id="arTableBody"></tbody></table></div></div>
+        </div>
+
+        <!-- PANEL 13: ACCOUNTS PAYABLE AP -->
+        <div id="view-ap" class="erp-view-panel" style="display:none;">
+          <div class="module-toolbar"><div class="breadcrumb-list"><a href="#" onclick="window.navigateTo('dashboard'); return false;">PackFlow ERP</a> / <span style="color:var(--text-primary); font-weight:600;">Accounts Payable</span></div></div>
+          <div class="page-header"><div class="page-title-group"><h1>Accounts Payable (Vendor Creditors)</h1><p>Track paper mill bills and payment due dates.</p></div></div>
+          <div class="card"><div class="card-body" style="padding:0;"><table class="data-table"><thead><tr><th>Bill ID</th><th>Vendor Mill</th><th>Mill Bill No</th><th>Bill Date</th><th>Credit Terms</th><th>Amount Due</th><th>Status</th></tr></thead><tbody id="apTableBody"></tbody></table></div></div>
+        </div>
+
+        <!-- PANEL 14: HR PAYROLL -->
+        <div id="view-hr" class="erp-view-panel" style="display:none;">
+          <div class="module-toolbar"><div class="breadcrumb-list"><a href="#" onclick="window.navigateTo('dashboard'); return false;">PackFlow ERP</a> / <span style="color:var(--text-primary); font-weight:600;">HR & Payroll</span></div></div>
+          <div class="page-header"><div class="page-title-group"><h1>HR Management & Payroll System</h1><p>Employee master directory, attendance tracking, and salary payslips.</p></div><div class="page-actions"><button class="btn btn-primary" onclick="window.showAddEmployeeModal()"><i>👔</i> Add New Employee</button></div></div>
+          <div class="card"><div class="card-body" style="padding:0;"><table class="data-table"><thead><tr><th>Emp ID</th><th>Employee Name</th><th>Department</th><th>Designation</th><th>Shift</th><th>Basic Salary</th><th>Attendance</th><th>Action</th></tr></thead><tbody id="hrTableBody"></tbody></table></div></div>
+        </div>
+
+        <!-- PANEL XX: SYSTEM USERS -->
+        <div id="view-users" class="erp-view-panel" style="display:none;">
+          <div class="module-toolbar">
+            <div class="breadcrumb-list"><a href="#" onclick="window.navigateTo('dashboard'); return false;">PackFlow ERP</a> / <span style="color:var(--text-primary); font-weight:600;">System Users</span></div>
+            <div class="stats-strip">
+              <button class="btn btn-primary" onclick="window.showAddUserModal()"><i>➕</i> Add New User</button>
+            </div>
+          </div>
+          <div class="page-header"><div class="page-title-group"><h1>System Users</h1><p>Manage application users and roles.</p></div></div>
+          <div class="card"><div class="card-body" style="padding:0;"><table class="data-table"><thead><tr><th>User Code</th><th>Name</th><th>Role</th><th>Email</th><th>Avatar</th><th>Action</th></tr></thead><tbody id="usersTableBody"></tbody></table></div></div>
+        </div>
+
+        <!-- PANEL 15: QUALITY CONTROL QC -->
+        <div id="view-qc" class="erp-view-panel" style="display:none;">
+          <div class="module-toolbar"><div class="breadcrumb-list"><a href="#" onclick="window.navigateTo('dashboard'); return false;">PackFlow ERP</a> / <span style="color:var(--text-primary); font-weight:600;">Quality Control (QC)</span></div></div>
+          <div class="page-header"><div class="page-title-group"><h1>Quality Control & Laboratory Testing</h1><p>Kraft paper Burst Factor (BF) testing, Ring Crush Test (RCT), and moisture %.</p></div><div class="page-actions"><button class="btn btn-primary" onclick="window.showAddQCModal()"><i>🔬</i> Log Paper Test Report</button></div></div>
+          <div class="card"><div class="card-body" style="padding:0;"><table class="data-table"><thead><tr><th>QC Test ID</th><th>Date</th><th>Item Tested</th><th>Tested GSM</th><th>Tested BF</th><th>Moisture %</th><th>Status</th></tr></thead><tbody id="qcTableBody"></tbody></table></div></div>
+        </div>
+
+        <!-- PANEL 16: AI REPORTS & ANALYTICS -->
+        <div id="view-analytics" class="erp-view-panel" style="display:none;">
+          <div class="module-toolbar"><div class="breadcrumb-list"><a href="#" onclick="window.navigateTo('dashboard'); return false;">PackFlow ERP</a> / <span style="color:var(--text-primary); font-weight:600;">AI Reports & Analytics</span></div></div>
+          <div class="page-header"><div class="page-title-group"><h1>AI Reports & Analytics Dashboard</h1><p>Machine OEE, scrap waste %, customer profitability, and paper consumption.</p></div></div>
+          <div class="card"><div class="card-body"><svg viewBox="0 0 400 180" style="width:100%; height:180px;"><rect x="30" y="80" width="45" height="80" fill="#06b6d4" rx="4"/><rect x="105" y="20" width="45" height="140" fill="#3b82f6" rx="4"/><rect x="180" y="110" width="45" height="50" fill="#6366f1" rx="4"/><rect x="255" y="70" width="45" height="90" fill="#8b5cf6" rx="4"/><rect x="330" y="40" width="45" height="120" fill="#f59e0b" rx="4"/><text x="52" y="175" fill="#9ca3af" font-size="10" text-anchor="middle">120GSM</text><text x="127" y="175" fill="#9ca3af" font-size="10" text-anchor="middle">140GSM</text><text x="202" y="175" fill="#9ca3af" font-size="10" text-anchor="middle">150GSM</text><text x="277" y="175" fill="#9ca3af" font-size="10" text-anchor="middle">180GSM</text><text x="352" y="175" fill="#9ca3af" font-size="10" text-anchor="middle">230GSM</text></svg></div></div>
+        </div>
+
+        <!-- PANEL 17: AUTOMATION RULES MATRIX -->
+        <div id="view-automation" class="erp-view-panel" style="display:none;">
+          <div class="module-toolbar"><div class="breadcrumb-list"><a href="#" onclick="window.navigateTo('dashboard'); return false;">PackFlow ERP</a> / <span style="color:var(--text-primary); font-weight:600;">Automation Rules Matrix</span></div></div>
+          <div class="page-header"><div class="page-title-group"><h1>No-Code Automation Rules Matrix</h1><p>Trigger-action rules for automated costing, order creation, and inventory alerts.</p></div><div class="page-actions"><button class="btn btn-primary" onclick="window.showAddRuleModal()"><i>⚡</i> Add Automation Rule</button></div></div>
+          <div class="card"><div class="card-body" style="padding:0;"><table class="data-table"><thead><tr><th>Rule ID</th><th>Rule Name</th><th>Trigger Condition</th><th>Automated Action</th><th>Status</th></tr></thead><tbody id="automationTableBody"></tbody></table></div></div>
+        </div>
+
+      </section>
+    </main>
+
+    <!-- BoxBrain AI Assistant Drawer -->
+    <div class="ai-drawer" id="aiDrawer">
+      <div class="ai-header">
+        <div style="display:flex; align-items:center; gap:0.5rem;">
+          <div class="logo-icon" style="width:30px; height:30px; font-size:0.9rem;">AI</div>
+          <strong style="font-size:0.95rem;">BoxBrain AI Assistant</strong>
+        </div>
+        <button class="modal-close" id="aiCloseBtn">&times;</button>
+      </div>
+
+      <div class="ai-messages" id="chatMessages">
+        <div class="chat-bubble ai">
+          👋 Hi! I am <strong>BoxBrain AI</strong>, your packaging ERP assistant.<br><br>
+          Try typing:<br>
+          • <em>"Cost a 5 ply box 18x12x10 with 5000 qty"</em><br>
+          • <em>"Show paper stock under 1000kg"</em><br>
+          • <em>"What is our customer outstanding?"</em>
+        </div>
+      </div>
+
+      <div class="ai-input-box">
+        <input type="text" id="aiInput" placeholder="Ask BoxBrain AI anything...">
+        <button class="btn btn-primary" id="aiSendBtn"><i>➔</i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Complete Standalone Embedded ERP Engine -->
+  <script>
+/* PackFlow AI ERP - Comprehensive Master Dataset */
+
+window.PACKFLOW_MOCK_DATA = {
+  company: {
+    name: "PackFlow Packaging Industries Pvt. Ltd.",
+    gstin: "27AAACP1234F1Z9",
+    pan: "AAACP1234F",
+    address: "Plot 42-45, Chakan Industrial Area, Phase II, Pune, MH - 410501",
+    email: "contact@packflow-erp.com",
+    phone: "+91 98230 12345",
+    bank: {
+      name: "HDFC Bank Ltd.",
+      branch: "Chakan Branch",
+      accountNo: "50200012345678",
+      ifsc: "HDFC0000456"
+    }
+  },
+
+  plants: [
+    { id: "P1", name: "Plant 1 - Pune Mega Unit", location: "Chakan, Pune" },
+    { id: "P2", name: "Plant 2 - Gujarat Unit", location: "Sanand, Ahmedabad" }
+  ],
+
+  users: [
+    { id: "U1", name: "Rajesh Sharma", role: "Super Admin", avatar: "RS" },
+    { id: "U2", name: "Anand Verma", role: "Director", avatar: "AV" },
+    { id: "U3", name: "Priya Nair", role: "Accountant", avatar: "PN" },
+    { id: "U4", name: "Vikram Malhotra", role: "Sales Manager", avatar: "VM" },
+    { id: "U5", name: "Suresh Patil", role: "Production Manager", avatar: "SP" },
+    { id: "U6", name: "Mahesh Shinde", role: "Quality Inspector", avatar: "MS" },
+    { id: "U7", name: "Ramesh Pawar", role: "Dispatch Executive", avatar: "RP" }
+  ],
+
+  customers: [
+    {
+      id: "CUST-1001",
+      name: "Amazon Seller Services India Pvt Ltd",
+      gstin: "27AABCA1234D1Z2",
+      pan: "AABCA1234D",
+      city: "Bhiwandi, MH",
+      contact: "Amit Deshmukh",
+      phone: "+91 98700 11223",
+      email: "procurement@amazon-vendor.in",
+      creditLimit: 2500000,
+      outstanding: 845000,
+      paymentTerms: "30 Days Net"
+    },
+    {
+      id: "CUST-1002",
+      name: "Jubilant FoodWorks (Domino's)",
+      gstin: "27AAACJ4321E1Z5",
+      pan: "AAACJ4321E",
+      city: "Greater Noida, UP",
+      contact: "Rohan Gupta",
+      phone: "+91 98221 44556",
+      email: "packaging@jubilantfood.com",
+      creditLimit: 1500000,
+      outstanding: 320000,
+      paymentTerms: "15 Days Net"
+    },
+    {
+      id: "CUST-1003",
+      name: "Sun Pharmaceutical Industries Ltd",
+      gstin: "27AAACS9876K1Z8",
+      pan: "AAACS9876K",
+      city: "Halol, GJ",
+      contact: "Dr. K. V. Rao",
+      phone: "+91 98990 77889",
+      email: "supplychain@sunpharma.com",
+      creditLimit: 4000000,
+      outstanding: 1120000,
+      paymentTerms: "45 Days Net"
+    },
+    {
+      id: "CUST-1004",
+      name: "Varun Beverages Ltd (PepsiCo)",
+      gstin: "27AAACV5544H1Z1",
+      pan: "AAACV5544H",
+      city: "Nagpur, MH",
+      contact: "Deepak Joshi",
+      phone: "+91 98112 33445",
+      email: "purchase@varunbev.com",
+      creditLimit: 3000000,
+      outstanding: 450000,
+      paymentTerms: "30 Days Net"
+    }
+  ],
+
+  vendors: [
+    { id: "VEND-2001", name: "ITC Paperboards & Specialty Papers", category: "Kraft Paper Mill", city: "Bhadrachalam", phone: "+91 40 2345 6789", balance: 1450000 },
+    { id: "VEND-2002", name: "West Coast Paper Mills Ltd", category: "Kraft Paper Mill", city: "Dandeli", phone: "+91 8284 230881", balance: 980000 },
+    { id: "VEND-2003", name: "Hubergroup India (Printing Inks)", category: "Chemicals & Ink", city: "Vapi", phone: "+91 260 240 1234", balance: 120000 },
+    { id: "VEND-2004", name: "Corn Products Starch & Gums", category: "Adhesive Raw Material", city: "Ahmedabad", phone: "+91 79 2658 9900", balance: 65000 }
+  ],
+
+  fefcoStyles: [
+    { code: "FEFCO 0201", name: "RSC - Regular Slotted Carton", desc: "Standard shipping box with meeting outer flaps." },
+    { code: "FEFCO 0200", name: "HSC - Half Slotted Carton", desc: "Open top carton without top flaps." },
+    { code: "FEFCO 0427", name: "Die-Cut Folder / E-Commerce Box", desc: "Self-locking mailer box with tuck flaps." },
+    { code: "FEFCO 0300", name: "Telescopic Box", desc: "Two-piece lid & bottom box." }
+  ],
+
+  kraftReelsInventory: [
+    { id: "REEL-901", gsm: 180, bf: 24, deckleWidthInches: 52, weightKg: 850, warehouse: "Raw Paper Yard A", supplier: "ITC Paper", ratePerKg: 38 },
+    { id: "REEL-902", gsm: 140, bf: 22, deckleWidthInches: 52, weightKg: 1100, warehouse: "Raw Paper Yard A", supplier: "West Coast Paper", ratePerKg: 34 },
+    { id: "REEL-903", gsm: 120, bf: 18, deckleWidthInches: 48, weightKg: 620, warehouse: "Raw Paper Yard B", supplier: "West Coast Paper", ratePerKg: 31 },
+    { id: "REEL-904", gsm: 230, bf: 28, deckleWidthInches: 60, weightKg: 1450, warehouse: "Raw Paper Yard A", supplier: "ITC Paper", ratePerKg: 44 },
+    { id: "REEL-905", gsm: 150, bf: 22, deckleWidthInches: 44, weightKg: 410, warehouse: "Raw Paper Yard B", supplier: "Trident Paper", ratePerKg: 35 }
+  ],
+
+  machines: [
+    { id: "M1", name: "5-Ply Automatic Corrugator Line 1", type: "Corrugator", status: "Running", speedMpm: 145, oeePercent: 88, job: "JOB-4001" },
+    { id: "M2", name: "Flexo 3-Color Printer Slotter 1", type: "Printer Slotter", status: "Running", speedMpm: 220, oeePercent: 92, job: "JOB-4002" },
+    { id: "M3", name: "High-Speed Rotary Die Cutter", type: "Die Cutter", status: "Idle", speedMpm: 0, oeePercent: 74, job: "Standby" },
+    { id: "M4", name: "Automatic Folder Gluer & Strapper", type: "Folder Gluer", status: "Running", speedMpm: 180, oeePercent: 85, job: "JOB-4001" },
+    { id: "M5", name: "Heavy Duty Box Stitching Machine", type: "Stitcher", status: "Maintenance", speedMpm: 0, oeePercent: 60, job: "Servicing" }
+  ],
+
+  quotations: [
+    {
+      id: "QT-8001",
+      date: "2026-08-28",
+      customer: "Amazon Seller Services India Pvt Ltd",
+      boxSpecs: "18 x 12 x 10 in (5-Ply RSC)",
+      qty: 10000,
+      costPerBox: 34.50,
+      marginPercent: 18,
+      unitPrice: 40.70,
+      totalAmount: 407000,
+      gstAmount: 73260,
+      grandTotal: 480260,
+      status: "Approved"
+    },
+    {
+      id: "QT-8002",
+      date: "2026-08-30",
+      customer: "Jubilant FoodWorks (Domino's)",
+      boxSpecs: "10 x 10 x 1.5 in Pizza Box (E-Flute 3-Ply)",
+      qty: 50000,
+      costPerBox: 8.20,
+      marginPercent: 20,
+      unitPrice: 9.84,
+      totalAmount: 492000,
+      gstAmount: 88560,
+      grandTotal: 580560,
+      status: "Pending Approval"
+    }
+  ],
+
+  salesOrders: [
+    {
+      id: "SO-5001",
+      quotationRef: "QT-8001",
+      date: "2026-08-29",
+      customer: "Amazon Seller Services India Pvt Ltd",
+      poNumber: "PO-AMZ-998822",
+      deliveryDate: "2026-09-08",
+      boxName: "Master Outer Box 18x12x10 5-Ply",
+      orderQty: 10000,
+      dispatchedQty: 4000,
+      pendingQty: 6000,
+      status: "In Production",
+      amount: 480260
+    },
+    {
+      id: "SO-5002",
+      quotationRef: "QT-7990",
+      date: "2026-08-20",
+      customer: "Sun Pharmaceutical Industries Ltd",
+      poNumber: "PO-SUN-4411",
+      deliveryDate: "2026-09-03",
+      boxName: "Pharma Export Shipper 7-Ply 24x18x18",
+      orderQty: 3000,
+      dispatchedQty: 3000,
+      pendingQty: 0,
+      status: "Dispatched",
+      amount: 385000
+    }
+  ],
+
+  jobCards: [
+    {
+      id: "JOB-4001",
+      soRef: "SO-5001",
+      customer: "Amazon Seller Services India Pvt Ltd",
+      boxSpecs: "18x12x10 inch | 5-Ply | BC Flute",
+      sheetSize: "1575 mm x 810 mm",
+      deckleUsed: "64 inch Reel",
+      targetQty: 10000,
+      producedQty: 4200,
+      wasteKg: 110,
+      assignedMachine: "Corrugator Line 1",
+      status: "In Progress",
+      scheduledStart: "2026-09-01 08:00"
+    },
+    {
+      id: "JOB-4002",
+      soRef: "SO-5002",
+      customer: "Sun Pharmaceutical Industries Ltd",
+      boxSpecs: "24x18x18 inch | 7-Ply Heavy Duty",
+      sheetSize: "2180 mm x 1220 mm",
+      deckleUsed: "72 inch Reel",
+      targetQty: 3000,
+      producedQty: 3000,
+      wasteKg: 85,
+      assignedMachine: "Flexo Printer 1",
+      status: "Completed",
+      scheduledStart: "2026-08-29 10:00"
+    }
+  ],
+
+  invoices: [
+    {
+      invoiceNo: "INV-2026-0089",
+      date: "2026-08-31",
+      customer: "Sun Pharmaceutical Industries Ltd",
+      gstin: "27AAACS9876K1Z8",
+      hsnCode: "48191010",
+      taxableValue: 326271,
+      igst: 58729,
+      cgst: 0,
+      sgst: 0,
+      totalAmount: 385000,
+      eWayBillNo: "221045998812",
+      status: "Unpaid"
+    },
+    {
+      invoiceNo: "INV-2026-0088",
+      date: "2026-08-25",
+      customer: "Amazon Seller Services India Pvt Ltd",
+      gstin: "27AABCA1234D1Z2",
+      hsnCode: "48191010",
+      taxableValue: 169491,
+      igst: 0,
+      cgst: 15254,
+      sgst: 15254,
+      totalAmount: 200000,
+      eWayBillNo: "221045991104",
+      status: "Paid"
+    }
+  ],
+
+  employees: [
+    { id: "EMP-101", name: "Suresh Patil", dept: "Production", designation: "Production Manager", shift: "General", basicSalary: 45000, attendance: "Present" },
+    { id: "EMP-102", name: "Ramesh Pawar", dept: "Dispatch", designation: "Dispatch Supervisor", shift: "Morning", basicSalary: 28000, attendance: "Present" },
+    { id: "EMP-103", name: "Mahesh Shinde", dept: "Quality", designation: "QC Chemist", shift: "Morning", basicSalary: 32000, attendance: "Present" },
+    { id: "EMP-104", name: "Vikas Gawde", dept: "Maintenance", designation: "Machine Technician", shift: "Night", basicSalary: 25000, attendance: "Absent" }
+  ],
+
+  automationRules: [
+    { id: "RULE-1", name: "Auto Sales Order Creation", trigger: "Quotation Status == Approved", action: "Create Draft Sales Order & Notify Production Manager", status: "Active" },
+    { id: "RULE-2", name: "Low Reel Stock Warning", trigger: "Kraft Reel Weight < 500 kg", action: "Create Purchase Requisition & Send WhatsApp Alert", status: "Active" },
+    { id: "RULE-3", name: "Overdue Invoice Reminder", trigger: "Invoice Unpaid > 30 Days", action: "Send Automated Email & SMS Payment Advice to Customer", status: "Active" }
+  ]
+};
+
+
+/* --- END MODULE --- */
+
+/* PackFlow AI ERP - Central State Store & Event Manager with Defensive State Guard */
+
+class StateManager {
+  constructor() {
+    this.listeners = [];
+    this.loadState();
+  }
+
+  loadState() {
+    try {
+      const saved = localStorage.getItem("PACKFLOW_ERP_STATE_V3");
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed && typeof parsed === "object") {
+          this.state = parsed;
+        } else {
+          this.state = window.PACKFLOW_MOCK_DATA;
+        }
+      } else {
+        this.state = window.PACKFLOW_MOCK_DATA;
+      }
+    } catch (e) {
+      this.state = window.PACKFLOW_MOCK_DATA;
+    }
+
+    if (!this.state || typeof this.state !== "object") {
+      this.state = window.PACKFLOW_MOCK_DATA || {};
+    }
+
+    // Defensive Initializations
+    if (!this.state.currentRole) this.state.currentRole = "Super Admin";
+    if (!this.state.currentPlant) this.state.currentPlant = "P1";
+    if (!Array.isArray(this.state.customers)) this.state.customers = (window.PACKFLOW_MOCK_DATA && window.PACKFLOW_MOCK_DATA.customers) || [];
+    if (!Array.isArray(this.state.quotations)) this.state.quotations = (window.PACKFLOW_MOCK_DATA && window.PACKFLOW_MOCK_DATA.quotations) || [];
+    if (!Array.isArray(this.state.salesOrders)) this.state.salesOrders = (window.PACKFLOW_MOCK_DATA && window.PACKFLOW_MOCK_DATA.salesOrders) || [];
+    if (!Array.isArray(this.state.jobCards)) this.state.jobCards = (window.PACKFLOW_MOCK_DATA && window.PACKFLOW_MOCK_DATA.jobCards) || [];
+    if (!Array.isArray(this.state.invoices)) this.state.invoices = (window.PACKFLOW_MOCK_DATA && window.PACKFLOW_MOCK_DATA.invoices) || [];
+    if (!Array.isArray(this.state.vendors)) this.state.vendors = (window.PACKFLOW_MOCK_DATA && window.PACKFLOW_MOCK_DATA.vendors) || [];
+    if (!Array.isArray(this.state.kraftReelsInventory)) this.state.kraftReelsInventory = (window.PACKFLOW_MOCK_DATA && window.PACKFLOW_MOCK_DATA.kraftReelsInventory) || [];
+    if (!Array.isArray(this.state.machines)) this.state.machines = (window.PACKFLOW_MOCK_DATA && window.PACKFLOW_MOCK_DATA.machines) || [];
+    if (!Array.isArray(this.state.employees)) this.state.employees = (window.PACKFLOW_MOCK_DATA && window.PACKFLOW_MOCK_DATA.employees) || [];
+    if (!Array.isArray(this.state.automationRules)) this.state.automationRules = (window.PACKFLOW_MOCK_DATA && window.PACKFLOW_MOCK_DATA.automationRules) || [];
+    if (!Array.isArray(this.state.purchaseOrders)) this.state.purchaseOrders = [
+      { id: "PO-3001", vendor: "ITC Paperboards", date: "2026-08-25", items: "Kraft Paper 180GSM 52\" (5 Tonnes)", amount: 190000, status: "Received" },
+      { id: "PO-3002", vendor: "Hubergroup India", date: "2026-08-28", items: "Flexo Printing Ink Cyan/Magenta (200kg)", amount: 4500, status: "Ordered" }
+    ];
+    if (!Array.isArray(this.state.qcLogs)) this.state.qcLogs = [
+      { id: "QC-701", date: "2026-08-30", item: "Reel #REEL-901 (ITC Paper)", testedGsm: 181, testedBf: 24.2, moisture: "6.8%", status: "Passed" },
+      { id: "QC-702", date: "2026-08-31", item: "Job #JOB-4001 Finished Boxes", testedGsm: 730, testedBf: 15.5, moisture: "7.1%", status: "Passed" }
+    ];
+    if (!Array.isArray(this.state.receipts)) this.state.receipts = [
+      { id: "RCT-101", date: "2026-08-26", customer: "Amazon Seller Services", invoiceRef: "INV-2026-0088", amount: 200000, mode: "NEFT Bank Transfer" }
+    ];
+    if (!Array.isArray(this.state.vendorBills)) this.state.vendorBills = [
+      { id: "BILL-501", vendor: "ITC Paperboards", billNo: "ITC-PNE-9944", date: "2026-08-20", dueDays: 15, amount: 190000, status: "Unpaid" },
+      { id: "BILL-502", vendor: "West Coast Paper", billNo: "WCP-9912", date: "2026-08-15", dueDays: 30, amount: 145000, status: "Paid" }
+    ];
+    if (!Array.isArray(this.state.dispatchNotes)) this.state.dispatchNotes = [
+      { id: "DSP-6001", date: "2026-08-31", customer: "Sun Pharmaceutical Industries Ltd", items: "3,000 Pcs Shipper 7-Ply", vehicleNo: "MH-14-GX-5542", eWayBill: "221045998812", status: "In Transit" }
+    ];
+  }
+
+  saveState() {
+    try {
+      localStorage.setItem("PACKFLOW_ERP_STATE_V3", JSON.stringify(this.state));
+    } catch (e) {}
+    this.notify();
+  }
+
+  subscribe(listener) {
+    this.listeners.push(listener);
+    return () => {
+      this.listeners = this.listeners.filter(l => l !== listener);
+    };
+  }
+
+  notify() {
+    this.listeners.forEach(listener => {
+      try { listener(this.state); } catch (e) {}
+    });
+  }
+
+  setRole(roleName) {
+    this.state.currentRole = roleName;
+    this.saveState();
+  }
+
+  setPlant(plantId) {
+    this.state.currentPlant = plantId;
+    this.saveState();
+  }
+
+  // Guaranteed Array Getters
+  getQuotations() { return Array.isArray(this.state?.quotations) ? this.state.quotations : []; }
+  getSalesOrders() { return Array.isArray(this.state?.salesOrders) ? this.state.salesOrders : []; }
+  getJobCards() { return Array.isArray(this.state?.jobCards) ? this.state.jobCards : []; }
+  getInvoices() { return Array.isArray(this.state?.invoices) ? this.state.invoices : []; }
+  getCustomers() { return Array.isArray(this.state?.customers) ? this.state.customers : []; }
+  getVendors() { return Array.isArray(this.state?.vendors) ? this.state.vendors : []; }
+  getReels() { return Array.isArray(this.state?.kraftReelsInventory) ? this.state.kraftReelsInventory : []; }
+  getMachines() { return Array.isArray(this.state?.machines) ? this.state.machines : []; }
+  getEmployees() { return Array.isArray(this.state?.employees) ? this.state.employees : []; }
+  getAutomationRules() { return Array.isArray(this.state?.automationRules) ? this.state.automationRules : []; }
+  getPurchaseOrders() { return Array.isArray(this.state?.purchaseOrders) ? this.state.purchaseOrders : []; }
+  getQCLogs() { return Array.isArray(this.state?.qcLogs) ? this.state.qcLogs : []; }
+  getReceipts() { return Array.isArray(this.state?.receipts) ? this.state.receipts : []; }
+  getVendorBills() { return Array.isArray(this.state?.vendorBills) ? this.state.vendorBills : []; }
+  getDispatchNotes() { return Array.isArray(this.state?.dispatchNotes) ? this.state.dispatchNotes : []; }
+
+  // Action Methods with Explicit Return Values
+  addCustomer(customer) {
+    if (!customer.id) customer.id = "CUST-" + (1005 + this.getCustomers().length);
+    this.getCustomers().unshift(customer);
+    this.saveState();
+    return customer;
+  }
+
+  addQuotation(quotation) {
+    if (!quotation.id) quotation.id = "QT-" + (8005 + this.getQuotations().length);
+    this.getQuotations().unshift(quotation);
+    this.saveState();
+    return quotation;
+  }
+
+  convertQuotationToSO(quotationId) {
+    const qt = this.getQuotations().find(q => q.id === quotationId);
+    if (qt) {
+      qt.status = "Approved";
+      const newSO = {
+        id: "SO-" + (5000 + this.getSalesOrders().length + 1),
+        quotationRef: qt.id,
+        date: new Date().toISOString().split('T')[0],
+        customer: qt.customer,
+        poNumber: "PO-CUST-" + Math.floor(1000 + Math.random() * 9000),
+        deliveryDate: new Date(Date.now() + 7 * 86400000).toISOString().split('T')[0],
+        boxName: qt.boxSpecs,
+        orderQty: qt.qty,
+        dispatchedQty: 0,
+        pendingQty: qt.qty,
+        status: "In Production",
+        amount: qt.grandTotal
+      };
+      this.getSalesOrders().unshift(newSO);
+      
+      const newJob = {
+        id: "JOB-" + (4000 + this.getJobCards().length + 1),
+        soRef: newSO.id,
+        customer: qt.customer,
+        boxSpecs: qt.boxSpecs,
+        sheetSize: "1600 mm x 850 mm",
+        deckleUsed: "64 inch Reel",
+        targetQty: qt.qty,
+        producedQty: 0,
+        wasteKg: 0,
+        assignedMachine: "Corrugator Line 1",
+        status: "In Progress",
+        scheduledStart: new Date().toISOString().replace('T', ' ').slice(0, 16)
+      };
+      this.getJobCards().unshift(newJob);
+      this.saveState();
+      return newSO;
+    }
+    return null;
+  }
+
+  addReel(reel) {
+    if (!reel.id) reel.id = "REEL-" + (906 + this.getReels().length);
+    this.getReels().unshift(reel);
+    this.saveState();
+    return reel;
+  }
+
+  addEmployee(emp) {
+    if (!emp.id) emp.id = "EMP-" + (105 + this.getEmployees().length);
+    this.getEmployees().unshift(emp);
+    this.saveState();
+    return emp;
+  }
+
+  // User management: ensure unique user codes and basic CRUD
+  getUsers() { return Array.isArray(this.state.users) ? this.state.users : []; }
+
+  addUser(user) {
+    // generate unique user code like U1, U2 ... ensuring no collision
+    const users = this.getUsers();
+    let max = 0;
+    users.forEach(u => {
+      const m = String(u.id || '').match(/U(\d+)/);
+      if (m && m[1]) max = Math.max(max, parseInt(m[1], 10));
+    });
+    const next = max + 1;
+    if (!user.id) user.id = 'U' + next;
+    if (!user.role) user.role = 'User';
+    this.getUsers().unshift(user);
+    this.saveState();
+    return user;
+  }
+
+  // Allow superadmin to set company profile
+  setCompanyProfile(profile) {
+    this.state.company = Object.assign({}, this.state.company || {}, profile);
+    this.saveState();
+    return this.state.company;
+  }
+
+  addPurchaseOrder(po) {
+    if (!po.id) po.id = "PO-" + (3003 + this.getPurchaseOrders().length);
+    this.getPurchaseOrders().unshift(po);
+    this.saveState();
+    return po;
+  }
+
+  addReceipt(receipt) {
+    if (!receipt.id) receipt.id = "RCT-" + (102 + this.getReceipts().length);
+    this.getReceipts().unshift(receipt);
+    const cust = this.getCustomers().find(c => c.name === receipt.customer);
+    if (cust) {
+      cust.outstanding = Math.max(0, cust.outstanding - receipt.amount);
+    }
+    this.saveState();
+    return receipt;
+  }
+
+  addQCLog(log) {
+    if (!log.id) log.id = "QC-" + (703 + this.getQCLogs().length);
+    this.getQCLogs().unshift(log);
+    this.saveState();
+    return log;
+  }
+
+  addAutomationRule(rule) {
+    if (!rule.id) rule.id = "RULE-" + (this.getAutomationRules().length + 1);
+    this.getAutomationRules().unshift(rule);
+    this.saveState();
+    return rule;
+  }
+
+  toggleMachineStatus(machineId) {
+    const m = this.getMachines().find(mac => mac.id === machineId);
+    if (m) {
+      m.status = m.status === "Running" ? "Idle" : "Running";
+      m.speedMpm = m.status === "Running" ? 145 : 0;
+      this.saveState();
+      return m;
+    }
+    return null;
+  }
+
+  resetToDefault() {
+    this.state = window.PACKFLOW_MOCK_DATA;
+    this.saveState();
+  }
+}
+
+window.appState = new StateManager();
+
+
+/* --- END MODULE --- */
+
+/* PackFlow AI ERP - Corrugated Box Costing Engineering & CAD SVG Engine */
+
+class CorrugatedCostingEngine {
+  constructor() {
+    this.fluteFactors = {
+      "A": 1.54,
+      "B": 1.35,
+      "C": 1.42,
+      "E": 1.28,
+      "BC": 1.77
+    };
+    this.standardDecklesInches = [36, 40, 44, 48, 52, 56, 60, 64, 72, 80, 88];
+  }
+
+  /**
+   * Generate 3D CAD Wireframe Box Diagram in SVG format
+   */
+  generateBoxCADSVG(l = 300, w = 200, h = 150, style = "FEFCO 0201") {
+    return `
+      <svg class="cad-svg-box" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="boxGradFront" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#d97706" />
+            <stop offset="100%" stop-color="#b45309" />
+          </linearGradient>
+          <linearGradient id="boxGradTop" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f59e0b" />
+            <stop offset="100%" stop-color="#d97706" />
+          </linearGradient>
+          <linearGradient id="boxGradSide" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#92400e" />
+            <stop offset="100%" stop-color="#78350f" />
+          </linearGradient>
+        </defs>
+
+        <!-- 3D Box Geometry -->
+        <!-- Top Face -->
+        <polygon points="120,40 280,40 230,80 70,80" fill="url(#boxGradTop)" stroke="#fbbf24" stroke-width="1.5" />
+        <!-- Front Face -->
+        <polygon points="70,80 230,80 230,190 70,190" fill="url(#boxGradFront)" stroke="#fbbf24" stroke-width="1.5" />
+        <!-- Right Side Face -->
+        <polygon points="230,80 280,40 280,150 230,190" fill="url(#boxGradSide)" stroke="#fbbf24" stroke-width="1.5" />
+
+        <!-- Dimension Line Labels -->
+        <!-- Length Arrow -->
+        <line x1="70" y1="205" x2="230" y2="205" stroke="#06b6d4" stroke-width="2" marker-end="url(#arrow)" />
+        <text x="150" y="222" fill="#06b6d4" font-size="12" font-weight="bold" text-anchor="middle">L = ${l} mm</text>
+
+        <!-- Height Arrow -->
+        <line x1="50" y1="80" x2="50" y2="190" stroke="#10b981" stroke-width="2" />
+        <text x="35" y="140" fill="#10b981" font-size="12" font-weight="bold" text-anchor="middle" transform="rotate(-90 35 140)">H = ${h} mm</text>
+
+        <!-- Width Arrow -->
+        <line x1="240" y1="195" x2="290" y2="155" stroke="#f59e0b" stroke-width="2" />
+        <text x="280" y="190" fill="#f59e0b" font-size="12" font-weight="bold" text-anchor="start">W = ${w} mm</text>
+
+        <text x="200" y="25" fill="#f9fafb" font-size="13" font-weight="bold" text-anchor="middle">${style} Corrugated Box</text>
+      </svg>
+    `;
+  }
+
+  /**
+   * Generate Authentic Corrugated Flute Cross-Section SVG Diagram
+   */
+  generateFluteWaveSVG(ply = 5, layers = []) {
+    let flutePath = "";
+    // Draw sinusoidal wave flutes
+    for (let x = 10; x <= 370; x += 20) {
+      flutePath += `Q ${x + 5} 20, ${x + 10} 35 T ${x + 20} 35 `;
+    }
+
+    let flutePath2 = "";
+    for (let x = 10; x <= 370; x += 20) {
+      flutePath2 += `Q ${x + 5} 45, ${x + 10} 60 T ${x + 20} 60 `;
+    }
+
+    return `
+      <svg class="flute-wave-svg" viewBox="0 0 380 80" xmlns="http://www.w3.org/2000/svg">
+        <!-- Top Liner Sheet -->
+        <rect x="5" y="8" width="370" height="4" fill="#f59e0b" rx="2" />
+        <text x="12" y="7" fill="#fbbf24" font-size="9" font-weight="bold">Top Liner (${layers[0]?.gsm || 180} GSM)</text>
+
+        <!-- Flute 1 Wave -->
+        <path d="M 10 12 ${flutePath}" fill="none" stroke="#06b6d4" stroke-width="2.5" />
+
+        <!-- Middle Liner Sheet -->
+        <rect x="5" y="36" width="370" height="4" fill="#f59e0b" rx="2" />
+        
+        ${ply >= 5 ? `
+          <!-- Flute 2 Wave -->
+          <path d="M 10 38 ${flutePath2}" fill="none" stroke="#6366f1" stroke-width="2.5" />
+          <!-- Bottom Liner Sheet -->
+          <rect x="5" y="64" width="370" height="4" fill="#f59e0b" rx="2" />
+          <text x="12" y="76" fill="#fbbf24" font-size="9" font-weight="bold">Inner Liner (${layers[4]?.gsm || 140} GSM)</text>
+        ` : `
+          <text x="12" y="48" fill="#fbbf24" font-size="9" font-weight="bold">Inner Liner (${layers[2]?.gsm || 140} GSM)</text>
+        `}
+      </svg>
+    `;
+  }
+
+  /**
+   * Calculate complete box engineering specs, weights, and costing breakdown
+   */
+  calculateBoxCost(params) {
+    const {
+      lengthMm = 300,
+      widthMm = 200,
+      heightMm = 150,
+      ply = 5,
+      fefcoStyle = "FEFCO 0201",
+      layers = [
+        { gsm: 180, bf: 24, rateKg: 38 },
+        { gsm: 140, bf: 22, rateKg: 34 },
+        { gsm: 140, bf: 22, rateKg: 34 },
+        { gsm: 140, bf: 22, rateKg: 34 },
+        { gsm: 140, bf: 22, rateKg: 34 }
+      ],
+      wastagePercent = 6,
+      printingColors = 2,
+      stitching = true,
+      lamination = false,
+      dieCutting = false,
+      qtySlab = 5000,
+      marginPercent = 18,
+      freightPerBox = 1.50
+    } = params;
+
+    let jointFlapMm = 40;
+    let sheetLengthMm = 0;
+    let sheetWidthMm = 0;
+
+    if (fefcoStyle === "FEFCO 0201" || fefcoStyle === "FEFCO 0200") {
+      sheetLengthMm = ((lengthMm + widthMm) * 2) + jointFlapMm;
+      sheetWidthMm = widthMm + heightMm;
+    } else if (fefcoStyle === "FEFCO 0427") {
+      sheetLengthMm = (lengthMm * 2) + (heightMm * 4) + 30;
+      sheetWidthMm = (widthMm) + (heightMm * 4) + 40;
+    } else {
+      sheetLengthMm = ((lengthMm + widthMm) * 2) + jointFlapMm;
+      sheetWidthMm = widthMm + heightMm;
+    }
+
+    const sheetAreaM2 = (sheetLengthMm * sheetWidthMm) / 1000000;
+    const sheetWidthInches = sheetWidthMm / 25.4;
+
+    let selectedDeckleInches = this.standardDecklesInches.find(d => d >= sheetWidthInches) || 72;
+    let trimWasteMm = (selectedDeckleInches * 25.4) - sheetWidthMm;
+    let trimWastePercent = (trimWasteMm / (selectedDeckleInches * 25.4)) * 100;
+
+    if (sheetWidthInches * 2 <= 72) {
+      let doubleDeckle = this.standardDecklesInches.find(d => d >= sheetWidthInches * 2);
+      if (doubleDeckle) {
+        let altTrim = (doubleDeckle * 25.4) - (sheetWidthMm * 2);
+        if (altTrim < trimWasteMm) {
+          selectedDeckleInches = doubleDeckle;
+          trimWasteMm = altTrim / 2;
+          trimWastePercent = (trimWasteMm / (doubleDeckle * 25.4)) * 100;
+        }
+      }
+    }
+
+    let totalEffectiveGsm = 0;
+    let totalRateWeightProduct = 0;
+    let estimatedBurstingStrength = 0;
+
+    layers.forEach((layer, idx) => {
+      let takeup = 1.0;
+      if (ply === 3 && idx === 1) takeup = 1.38;
+      if (ply === 5 && (idx === 1 || idx === 3)) takeup = 1.40;
+      if (ply === 7 && (idx === 1 || idx === 3 || idx === 5)) takeup = 1.45;
+
+      const effectiveGsm = layer.gsm * takeup;
+      totalEffectiveGsm += effectiveGsm;
+      totalRateWeightProduct += effectiveGsm * (layer.rateKg || 35);
+      estimatedBurstingStrength += (layer.gsm * layer.bf) / 1000;
+    });
+
+    const averagePaperRatePerKg = totalEffectiveGsm > 0 ? (totalRateWeightProduct / totalEffectiveGsm) : 35;
+    const boxWeightKg = (sheetAreaM2 * totalEffectiveGsm) / 1000;
+
+    const basePaperCost = boxWeightKg * averagePaperRatePerKg;
+    const wastageCost = basePaperCost * (wastagePercent / 100);
+    const totalPaperCostWithWastage = basePaperCost + wastageCost;
+
+    const corrugationCost = sheetAreaM2 * 2.50;
+    const printingInkCost = printingColors * 0.45;
+    const starchGumCost = sheetAreaM2 * 0.80;
+    const stitchingWireCost = stitching ? 0.35 : 0;
+    const dieCuttingCost = dieCutting ? 0.85 : 0;
+    const laminationCost = lamination ? sheetAreaM2 * 3.20 : 0;
+    const labourOverheads = 1.20;
+
+    const totalConversionCost = corrugationCost + printingInkCost + starchGumCost + stitchingWireCost + dieCuttingCost + laminationCost + labourOverheads;
+
+    const totalProductionCostPerBox = totalPaperCostWithWastage + totalConversionCost + freightPerBox;
+    const grossMarginAmount = totalProductionCostPerBox * (marginPercent / 100);
+    const sellingPricePerBox = totalProductionCostPerBox + grossMarginAmount;
+    const gstRatePercent = 18;
+    const gstAmountPerBox = sellingPricePerBox * (gstRatePercent / 100);
+    const grandTotalPerBox = sellingPricePerBox + gstAmountPerBox;
+
+    const totalBatchCost = totalProductionCostPerBox * qtySlab;
+    const totalBatchRevenue = sellingPricePerBox * qtySlab;
+    const totalBatchProfit = grossMarginAmount * qtySlab;
+    const totalPaperRequirementKg = (boxWeightKg * qtySlab) * (1 + wastagePercent / 100);
+
+    return {
+      inputs: params,
+      sheetSpecs: {
+        sheetLengthMm: Math.round(sheetLengthMm),
+        sheetWidthMm: Math.round(sheetWidthMm),
+        sheetAreaM2: sheetAreaM2.toFixed(3),
+        selectedDeckleInches,
+        trimWasteMm: Math.round(trimWasteMm),
+        trimWastePercent: trimWastePercent.toFixed(1)
+      },
+      weightSpecs: {
+        totalEffectiveGsm: Math.round(totalEffectiveGsm),
+        boxWeightKg: boxWeightKg.toFixed(3),
+        estimatedBurstingStrength: estimatedBurstingStrength.toFixed(2),
+        totalPaperRequirementKg: Math.round(totalPaperRequirementKg)
+      },
+      costBreakdown: {
+        basePaperCost: basePaperCost.toFixed(2),
+        wastageCost: wastageCost.toFixed(2),
+        paperCostTotal: totalPaperCostWithWastage.toFixed(2),
+        totalConversionCost: totalConversionCost.toFixed(2),
+        freightPerBox: freightPerBox.toFixed(2),
+        totalProductionCostPerBox: totalProductionCostPerBox.toFixed(2),
+        grossMarginAmount: grossMarginAmount.toFixed(2),
+        sellingPricePerBox: sellingPricePerBox.toFixed(2),
+        gstAmountPerBox: gstAmountPerBox.toFixed(2),
+        grandTotalPerBox: grandTotalPerBox.toFixed(2)
+      },
+      batchSummary: {
+        qtySlab,
+        totalBatchCost: Math.round(totalBatchCost),
+        totalBatchRevenue: Math.round(totalBatchRevenue),
+        totalBatchProfit: Math.round(totalBatchProfit),
+        marginPercent
+      }
+    };
+  }
+}
+
+window.costingEngine = new CorrugatedCostingEngine();
+
+
+/* --- END MODULE --- */
+
+/* PackFlow AI ERP - GST Double-Entry Accounting Engine */
+
+class GSTAccountingEngine {
+  constructor() {
+    this.chartOfAccounts = [
+      { code: "1001", name: "Cash in Hand", category: "Asset", type: "Current Asset" },
+      { code: "1002", name: "HDFC Bank Operating Account", category: "Asset", type: "Current Asset" },
+      { code: "1100", name: "Accounts Receivable (Trade Debtors)", category: "Asset", type: "Current Asset" },
+      { code: "1200", name: "Raw Material Kraft Reel Inventory", category: "Asset", type: "Current Asset" },
+      { code: "1210", name: "Finished Goods Stock", category: "Asset", type: "Current Asset" },
+      { code: "1500", name: "Plant Machinery & Corrugators", category: "Asset", type: "Fixed Asset" },
+      { code: "2001", name: "Accounts Payable (Trade Creditors)", category: "Liability", type: "Current Liability" },
+      { code: "2100", name: "Output IGST Payable", category: "Liability", type: "Tax Liability" },
+      { code: "2101", name: "Output CGST Payable", category: "Liability", type: "Tax Liability" },
+      { code: "2102", name: "Output SGST Payable", category: "Liability", type: "Tax Liability" },
+      { code: "2110", name: "Input Tax Credit (ITC) IGST", category: "Asset", type: "Tax Credit" },
+      { code: "2111", name: "Input Tax Credit (ITC) CGST", category: "Asset", type: "Tax Credit" },
+      { code: "2112", name: "Input Tax Credit (ITC) SGST", category: "Asset", type: "Tax Credit" },
+      { code: "3000", name: "Shareholders Capital", category: "Equity", type: "Equity" },
+      { code: "4000", name: "Corrugated Box Sales Revenue", category: "Revenue", type: "Direct Income" },
+      { code: "5000", name: "Raw Material Paper Purchases", category: "Expense", type: "Direct Expense" },
+      { code: "5100", name: "Factory Power & Utility Expenses", category: "Expense", type: "Direct Expense" },
+      { code: "5200", name: "Direct Factory Wages", category: "Expense", type: "Direct Expense" },
+      { code: "6000", name: "Administrative & Sales Salaries", category: "Expense", type: "Indirect Expense" }
+    ];
+  }
+
+  /**
+   * Calculate GST Split (Intra-state vs Inter-state)
+   */
+  calculateGST(taxableAmount, customerStateCode = "27", supplierStateCode = "27", hsnCode = "48191010") {
+    const ratePercent = 18;
+    const isInterState = customerStateCode !== supplierStateCode;
+    
+    if (isInterState) {
+      const igstAmount = (taxableAmount * ratePercent) / 100;
+      return {
+        isInterState: true,
+        ratePercent,
+        cgstRate: 0,
+        sgstRate: 0,
+        igstRate: ratePercent,
+        cgstAmount: 0,
+        sgstAmount: 0,
+        igstAmount,
+        totalTax: igstAmount,
+        grandTotal: taxableAmount + igstAmount
+      };
+    } else {
+      const halfRate = ratePercent / 2; // 9% CGST, 9% SGST
+      const cgstAmount = (taxableAmount * halfRate) / 100;
+      const sgstAmount = (taxableAmount * halfRate) / 100;
+      const totalTax = cgstAmount + sgstAmount;
+      return {
+        isInterState: false,
+        ratePercent,
+        cgstRate: halfRate,
+        sgstRate: halfRate,
+        igstRate: 0,
+        cgstAmount,
+        sgstAmount,
+        igstAmount: 0,
+        totalTax,
+        grandTotal: taxableAmount + totalTax
+      };
+    }
+  }
+
+  /**
+   * Generate Financial Statements Summary
+   */
+  generateFinancialSummary(invoices = [], debtors = []) {
+    let totalSalesTaxable = 0;
+    let totalIGST = 0;
+    let totalCGST = 0;
+    let totalSGST = 0;
+
+    invoices.forEach(inv => {
+      totalSalesTaxable += inv.taxableValue || 0;
+      totalIGST += inv.igst || 0;
+      totalCGST += inv.cgst || 0;
+      totalSGST += inv.sgst || 0;
+    });
+
+    const totalRevenue = totalSalesTaxable;
+    const rawMaterialCost = totalRevenue * 0.62; // 62% typical paper cost ratio
+    const conversionOverheads = totalRevenue * 0.18; // 18% factory overheads
+    const grossProfit = totalRevenue - rawMaterialCost - conversionOverheads;
+    const adminExpenses = totalRevenue * 0.08;
+    const netProfitBeforeTax = grossProfit - adminExpenses;
+
+    return {
+      revenue: Math.round(totalRevenue),
+      cogs: Math.round(rawMaterialCost + conversionOverheads),
+      grossProfit: Math.round(grossProfit),
+      grossProfitMarginPercent: totalRevenue > 0 ? ((grossProfit / totalRevenue) * 100).toFixed(1) : 0,
+      netProfit: Math.round(netProfitBeforeTax),
+      netProfitMarginPercent: totalRevenue > 0 ? ((netProfitBeforeTax / totalRevenue) * 100).toFixed(1) : 0,
+      gstSummary: {
+        totalSalesTaxable: Math.round(totalSalesTaxable),
+        totalIGST: Math.round(totalIGST),
+        totalCGST: Math.round(totalCGST),
+        totalSGST: Math.round(totalSGST),
+        totalGSTPayable: Math.round(totalIGST + totalCGST + totalSGST)
+      }
+    };
+  }
+
+  /**
+   * Generate GSTR-1 Monthly Sales Return Summary
+   */
+  generateGSTR1(invoices = []) {
+    const b2bInvoices = invoices.map(inv => ({
+      gstin: inv.gstin,
+      customerName: inv.customer,
+      invoiceNo: inv.invoiceNo,
+      invoiceDate: inv.date,
+      invoiceValue: inv.totalAmount,
+      hsnCode: inv.hsnCode,
+      taxableValue: inv.taxableValue,
+      igst: inv.igst,
+      cgst: inv.cgst,
+      sgst: inv.sgst,
+      placeOfSupply: inv.igst > 0 ? "Out of State" : "Maharashtra (27)"
+    }));
+
+    return {
+      returnPeriod: "August 2026",
+      totalB2BCount: b2bInvoices.length,
+      b2bInvoices
+    };
+  }
+}
+
+window.accountingEngine = new GSTAccountingEngine();
+
+
+/* --- END MODULE --- */
+
+/* PackFlow AI ERP - Production Planning (MRP) & Shop Floor Engine */
+
+class MRPEngine {
+  constructor() {}
+
+  /**
+   * Schedule Job Card for shop floor production
+   */
+  createJobCard(salesOrder, targetQty) {
+    const jobCardId = "JOB-" + Math.floor(4000 + Math.random() * 1000);
+    return {
+      id: jobCardId,
+      soRef: salesOrder.id,
+      customer: salesOrder.customer,
+      boxSpecs: salesOrder.boxName,
+      targetQty: targetQty || salesOrder.pendingQty,
+      producedQty: 0,
+      wasteKg: 0,
+      assignedMachine: "Corrugator Line 1",
+      status: "In Progress",
+      scheduledStart: new Date().toISOString().replace('T', ' ').slice(0, 16)
+    };
+  }
+
+  /**
+   * Calculate Machine Overall Equipment Effectiveness (OEE)
+   */
+  calculateOEE(availabilityPercent = 92, performancePercent = 95, qualityPercent = 98) {
+    const oee = (availabilityPercent * performancePercent * qualityPercent) / 10000;
+    return (oee * 100).toFixed(1);
+  }
+
+  /**
+   * Update Machine Production Status
+   */
+  updateMachineProgress(machineId, addProducedQty, scrapKg) {
+    const machines = window.appState.getMachines();
+    const targetMachine = machines.find(m => m.id === machineId);
+    if (targetMachine) {
+      targetMachine.oeePercent = Math.min(99, targetMachine.oeePercent + 1);
+      window.appState.saveState();
+    }
+  }
+}
+
+window.mrpEngine = new MRPEngine();
+
+
+/* --- END MODULE --- */
+
+/* PackFlow AI ERP - No-Code Automation Rules Engine */
+
+class AutomationEngine {
+  constructor() {
+    this.logs = [];
+  }
+
+  /**
+   * Process triggers across state changes
+   * @param {String} triggerEvent Trigger string
+   * @param {Object} payload Event context data
+   */
+  processTrigger(triggerEvent, payload) {
+    const rules = window.appState.getAutomationRules();
+    rules.forEach(rule => {
+      if (rule.status === "Active" && rule.trigger.toLowerCase().includes(triggerEvent.toLowerCase())) {
+        this.executeRule(rule, payload);
+      }
+    });
+  }
+
+  executeRule(rule, payload) {
+    const logEntry = {
+      timestamp: new Date().toLocaleTimeString(),
+      ruleName: rule.name,
+      trigger: rule.trigger,
+      action: rule.action,
+      payload
+    };
+    this.logs.unshift(logEntry);
+
+    // In-app alert notification
+    if (window.showToast) {
+      window.showToast(`⚡ Automation Triggered: ${rule.name}`, "info");
+    }
+  }
+
+  getLogs() {
+    return this.logs;
+  }
+}
+
+window.automationEngine = new AutomationEngine();
+
+
+/* --- END MODULE --- */
+
+/* PackFlow AI ERP - BoxBrain AI Assistant & Natural Language Engine */
+
+class BoxBrainAIEngine {
+  constructor() {}
+
+  /**
+   * Process Natural Language Prompt Query
+   * @param {String} userPrompt Text entered in AI drawer
+   */
+  processQuery(userPrompt) {
+    const promptLower = userPrompt.toLowerCase().trim();
+
+    // 1. Costing Query Pattern (e.g. "Cost a 5 ply box 18x12x10 with 5000 qty" or "cost 3 ply 300x200x150")
+    if (promptLower.includes("cost") || promptLower.includes("price") || promptLower.includes("box")) {
+      return this.handleCostingQuery(userPrompt);
+    }
+
+    // 2. Paper Stock / Inventory Query
+    if (promptLower.includes("stock") || promptLower.includes("paper") || promptLower.includes("reel")) {
+      return this.handleStockQuery();
+    }
+
+    // 3. Customer Outstanding / Debtors Query
+    if (promptLower.includes("outstanding") || promptLower.includes("customer") || promptLower.includes("debtor") || promptLower.includes("due")) {
+      return this.handleOutstandingQuery();
+    }
+
+    // 4. Financial & Profit Query
+    if (promptLower.includes("profit") || promptLower.includes("revenue") || promptLower.includes("gst") || promptLower.includes("sales")) {
+      return this.handleFinancialQuery();
+    }
+
+    // 5. Default General Response
+    return {
+      text: `🤖 **BoxBrain AI Assistant**\nI am your packaging ERP assistant. You can ask me:\n- *"Cost a 5 ply box 18x12x10 with 5000 qty"*\n- *"Show paper stock under 1000kg"*\n- *"List customer outstanding balances"*\n- *"What is our monthly profit & GST payable?"*`,
+      action: null
+    };
+  }
+
+  handleCostingQuery(prompt) {
+    // Extract dimensions (e.g. 18x12x10 or 300x200x150)
+    let lengthMm = 300;
+    let widthMm = 200;
+    let heightMm = 150;
+    let ply = 5;
+    let qty = 5000;
+
+    // Check for ply
+    if (prompt.includes("3 ply") || prompt.includes("3ply")) ply = 3;
+    if (prompt.includes("7 ply") || prompt.includes("7ply")) ply = 7;
+
+    // Extract quantity
+    const qtyMatch = prompt.match(/(\d+)\s*(qty|pcs|quantity|boxes)/i);
+    if (qtyMatch) {
+      qty = parseInt(qtyMatch[1]);
+    }
+
+    // Extract dimensions L x W x H
+    const dimMatch = prompt.match(/(\d+)\s*[xX*×]\s*(\d+)\s*[xX*×]\s*(\d+)/);
+    if (dimMatch) {
+      let l = parseInt(dimMatch[1]);
+      let w = parseInt(dimMatch[2]);
+      let h = parseInt(dimMatch[3]);
+
+      // If dimensions are under 50, assume inches and convert to mm
+      if (l < 60) {
+        lengthMm = Math.round(l * 25.4);
+        widthMm = Math.round(w * 25.4);
+        heightMm = Math.round(h * 25.4);
+      } else {
+        lengthMm = l;
+        widthMm = w;
+        heightMm = h;
+      }
+    }
+
+    // Run Costing Engine
+    const result = window.costingEngine.calculateBoxCost({
+      lengthMm,
+      widthMm,
+      heightMm,
+      ply,
+      qtySlab: qty
+    });
+
+    const formattedText = `📦 **Box Costing Calculated for ${qty} pcs (${ply}-Ply RSC)**
+- **Dimensions**: ${lengthMm} × ${widthMm} × ${heightMm} mm
+- **Sheet Size**: ${result.sheetSpecs.sheetLengthMm} × ${result.sheetSpecs.sheetWidthMm} mm
+- **Optimal Reel (Deckle)**: ${result.sheetSpecs.selectedDeckleInches}" (Trim waste: ${result.sheetSpecs.trimWastePercent}%)
+- **Weight / Box**: ${result.weightSpecs.boxWeightKg} kg
+- **Estimated Bursting Strength**: ${result.weightSpecs.estimatedBurstingStrength} kg/cm²
+-------------------------------------------
+- **Paper Cost**: ₹${result.costBreakdown.paperCostTotal}
+- **Conversion & Overheads**: ₹${result.costBreakdown.totalConversionCost}
+- **Cost Price**: ₹${result.costBreakdown.totalProductionCostPerBox}
+- **Selling Price (+${result.batchSummary.marginPercent}% margin)**: **₹${result.costBreakdown.sellingPricePerBox}**
+- **Grand Total (with 18% GST)**: **₹${result.costBreakdown.grandTotalPerBox}**
+- **Total Order Value**: **₹${(result.costBreakdown.grandTotalPerBox * qty).toLocaleString('en-IN')}**`;
+
+    return {
+      text: formattedText,
+      costingResult: result,
+      action: "NAVIGATE_COSTING"
+    };
+  }
+
+  handleStockQuery() {
+    const reels = window.appState.getReels();
+    let totalWeightKg = reels.reduce((acc, r) => acc + r.weightKg, 0);
+    let lowStock = reels.filter(r => r.weightKg < 700);
+
+    let text = `📜 **Kraft Paper Reel Stock Summary**\n- **Total Paper Inventory**: **${totalWeightKg.toLocaleString()} kg** across ${reels.length} reels.\n\n**Low Stock Reel Alerts (< 700 kg):**\n`;
+    lowStock.forEach(r => {
+      text += `• Reel #${r.id} | ${r.gsm} GSM ${r.bf} BF | ${r.deckleWidthInches}" Reel | **${r.weightKg} kg remaining**\n`;
+    });
+
+    return { text, action: "NAVIGATE_INVENTORY" };
+  }
+
+  handleOutstandingQuery() {
+    const customers = window.appState.getCustomers();
+    let totalOut = customers.reduce((acc, c) => acc + c.outstanding, 0);
+
+    let text = `💳 **Customer Accounts Receivable Summary**\n- **Total Customer Outstanding**: **₹${totalOut.toLocaleString('en-IN')}**\n\n**Top Customer Receivables:**\n`;
+    customers.forEach(c => {
+      text += `• **${c.name}**: ₹${c.outstanding.toLocaleString('en-IN')} (Terms: ${c.paymentTerms})\n`;
+    });
+
+    return { text, action: "NAVIGATE_AR" };
+  }
+
+  handleFinancialQuery() {
+    const invoices = window.appState.getInvoices();
+    const debtors = window.appState.getCustomers();
+    const summary = window.accountingEngine.generateFinancialSummary(invoices, debtors);
+
+    let text = `📊 **Real-time Executive Financial Metrics**
+- **Monthly Revenue**: ₹${summary.revenue.toLocaleString('en-IN')}
+- **Cost of Goods Sold (COGS)**: ₹${summary.cogs.toLocaleString('en-IN')}
+- **Gross Profit**: ₹${summary.grossProfit.toLocaleString('en-IN')} (${summary.grossProfitMarginPercent}%)
+- **Net Profit**: ₹${summary.netProfit.toLocaleString('en-IN')} (${summary.netProfitMarginPercent}%)
+- **GSTR-1 GST Tax Payable**: ₹${summary.gstSummary.totalGSTPayable.toLocaleString('en-IN')}`;
+
+    return { text, action: "NAVIGATE_DASHBOARD" };
+  }
+}
+
+window.boxBrainAI = new BoxBrainAIEngine();
+
+
+/* --- END MODULE --- */
+
+/* PackFlow AI ERP - Professional Printable PDF Document Generator */
+
+class PDFDocumentGenerator {
+  constructor() {}
+
+  /**
+   * Open printable preview modal or print window
+   * @param {String} type Document type (Quotation, Invoice, JobCard, SalarySlip)
+   * @param {Object} data Document payload
+   */
+  generateDocument(type, data) {
+    const comp = window.appState.state.company;
+    let htmlContent = "";
+
+    if (type === "Quotation") {
+      htmlContent = this.renderQuotationHTML(comp, data);
+    } else if (type === "Invoice") {
+      htmlContent = this.renderInvoiceHTML(comp, data);
+    } else if (type === "JobCard") {
+      htmlContent = this.renderJobCardHTML(comp, data);
+    } else if (type === "SalarySlip") {
+      htmlContent = this.renderSalarySlipHTML(comp, data);
+    } else {
+      htmlContent = this.renderInvoiceHTML(comp, data);
+    }
+
+    // Open print window
+    const printWin = window.open("", "_blank", "width=850,height=1000");
+    printWin.document.write(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>${type} - PackFlow ERP</title>
+        <link rel="stylesheet" href="css/modules.css">
+        <style>
+          body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8fafc; padding: 20px; }
+          @media print {
+            body { background: #fff; padding: 0; }
+            .no-print { display: none !important; }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="no-print" style="margin-bottom: 20px; display: flex; justify-content: flex-end; gap: 10px;">
+          <button onclick="window.print()" style="background: #2563eb; color: #fff; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer;">🖨️ Print / Download PDF</button>
+          <button onclick="window.close()" style="background: #64748b; color: #fff; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer;">Close Window</button>
+        </div>
+        ${htmlContent}
+      </body>
+      </html>
+    `);
+    printWin.document.close();
+  }
+
+  renderInvoiceHTML(comp, inv) {
+    return `
+      <div class="invoice-paper">
+        <div class="invoice-header">
+          <div class="company-branding">
+            <h2>${comp.name}</h2>
+            <p style="font-size: 0.85rem; color: #64748b;">${comp.address}</p>
+            <p style="font-size: 0.85rem; color: #64748b;"><strong>GSTIN:</strong> ${comp.gstin} | <strong>PAN:</strong> ${comp.pan}</p>
+          </div>
+          <div style="text-align: right;">
+            <h1 style="color: #2563eb; font-size: 1.8rem; margin: 0;">TAX INVOICE</h1>
+            <p style="font-size: 0.9rem; margin-top: 5px;"><strong>Invoice No:</strong> ${inv.invoiceNo || 'INV-2026-0089'}</p>
+            <p style="font-size: 0.9rem;"><strong>Date:</strong> ${inv.date || '2026-08-31'}</p>
+            <p style="font-size: 0.85rem; color: #059669;"><strong>E-Way Bill:</strong> ${inv.eWayBillNo || '221045998812'}</p>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+          <div style="width: 48%; border: 1px solid #cbd5e1; padding: 12px; border-radius: 6px;">
+            <h4 style="margin-top: 0; color: #1e293b; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;">Billed To (Customer):</h4>
+            <p style="font-weight: 700; margin-bottom: 4px;">${inv.customer || 'Sun Pharmaceutical Industries Ltd'}</p>
+            <p style="font-size: 0.85rem; margin: 2px 0;">GSTIN: ${inv.gstin || '27AAACS9876K1Z8'}</p>
+            <p style="font-size: 0.85rem; margin: 2px 0;">State: Maharashtra (Code: 27)</p>
+          </div>
+          <div style="width: 48%; border: 1px solid #cbd5e1; padding: 12px; border-radius: 6px;">
+            <h4 style="margin-top: 0; color: #1e293b; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;">Transport & Dispatch Details:</h4>
+            <p style="font-size: 0.85rem; margin: 2px 0;">Vehicle No: MH-14-GX-5542</p>
+            <p style="font-size: 0.85rem; margin: 2px 0;">Dispatch Date: ${inv.date || '2026-08-31'}</p>
+            <p style="font-size: 0.85rem; margin: 2px 0;">Place of Supply: Halol, Gujarat</p>
+          </div>
+        </div>
+
+        <table class="invoice-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Description of Goods</th>
+              <th>HSN Code</th>
+              <th>Qty (Pcs)</th>
+              <th>Rate (₹)</th>
+              <th>Taxable Value (₹)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><strong>Pharma Export Shipper 7-Ply 24x18x18</strong><br><small style="color:#64748b">180 GSM Kraft / 140 Flute / 28 BF Heavy Duty</small></td>
+              <td>${inv.hsnCode || '48191010'}</td>
+              <td>3,000</td>
+              <td>₹108.75</td>
+              <td>₹${(inv.taxableValue || 326271).toLocaleString('en-IN')}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+          <div style="width: 50%; font-size: 0.85rem;">
+            <h5 style="margin-bottom: 5px;">Bank Details for Payment:</h5>
+            <p style="margin: 2px 0;">Bank: ${comp.bank.name}</p>
+            <p style="margin: 2px 0;">A/C No: ${comp.bank.accountNo}</p>
+            <p style="margin: 2px 0;">IFSC: ${comp.bank.ifsc}</p>
+          </div>
+          <div style="width: 45%;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+              <tr>
+                <td style="padding: 4px 0;">Taxable Amount:</td>
+                <td style="text-align: right; font-weight: 600;">₹${(inv.taxableValue || 326271).toLocaleString('en-IN')}</td>
+              </tr>
+              <tr>
+                <td style="padding: 4px 0;">IGST (18%):</td>
+                <td style="text-align: right; font-weight: 600;">₹${(inv.igst || 58729).toLocaleString('en-IN')}</td>
+              </tr>
+              <tr style="border-top: 2px solid #0f172a; font-size: 1.1rem; font-weight: 800;">
+                <td style="padding: 8px 0; color: #0f172a;">Grand Total:</td>
+                <td style="text-align: right; color: #2563eb;">₹${(inv.totalAmount || 385000).toLocaleString('en-IN')}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div style="margin-top: 40px; display: flex; justify-content: space-between; align-items: flex-end;">
+          <div>
+            <div style="width: 80px; height: 80px; border: 1px solid #cbd5e1; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #64748b;">
+              [ GST QR CODE ]
+            </div>
+          </div>
+          <div style="text-align: right;">
+            <p style="font-size: 0.85rem; margin-bottom: 40px;">For ${comp.name}</p>
+            <p style="font-weight: 700; border-top: 1px solid #94a3b8; padding-top: 5px;">Authorized Signatory</p>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  renderQuotationHTML(comp, qt) {
+    return `
+      <div class="invoice-paper">
+        <div class="invoice-header">
+          <div class="company-branding">
+            <h2>${comp.name}</h2>
+            <p style="font-size: 0.85rem; color: #64748b;">Corrugated Packaging Division</p>
+          </div>
+          <div style="text-align: right;">
+            <h1 style="color: #7c3aed; font-size: 1.8rem; margin: 0;">QUOTATION</h1>
+            <p style="font-size: 0.9rem; margin-top: 5px;"><strong>Ref No:</strong> ${qt.id || 'QT-8001'}</p>
+            <p style="font-size: 0.9rem;"><strong>Date:</strong> ${qt.date || '2026-08-28'}</p>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 20px; border: 1px solid #cbd5e1; padding: 12px; border-radius: 6px;">
+          <h4 style="margin-top: 0;">Quotation Prepared For:</h4>
+          <p style="font-weight: 700; font-size: 1.1rem; color: #0f172a;">${qt.customer || 'Amazon Seller Services India Pvt Ltd'}</p>
+          <p style="font-size: 0.85rem; color: #475569;">Item Requested: <strong>${qt.boxSpecs || '18 x 12 x 10 in (5-Ply RSC)'}</strong></p>
+        </div>
+
+        <table class="invoice-table">
+          <thead>
+            <tr>
+              <th>Box Specification</th>
+              <th>Quantity</th>
+              <th>Unit Cost (₹)</th>
+              <th>Selling Price / Pc</th>
+              <th>Total Taxable (₹)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>${qt.boxSpecs || '18 x 12 x 10 in (5-Ply RSC)'}</strong><br>
+                <small style="color:#64748b">Top Liner: 180GSM 24BF | Flute: 140GSM 22BF | BC Flute | 2 Color Flexo Print</small>
+              </td>
+              <td>${(qt.qty || 10000).toLocaleString()}</td>
+              <td>₹${qt.costPerBox || '34.50'}</td>
+              <td><strong>₹${qt.unitPrice || '40.70'}</strong></td>
+              <td>₹${(qt.totalAmount || 407000).toLocaleString('en-IN')}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
+          <div style="width: 45%;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+              <tr>
+                <td style="padding: 4px 0;">Subtotal:</td>
+                <td style="text-align: right; font-weight: 600;">₹${(qt.totalAmount || 407000).toLocaleString('en-IN')}</td>
+              </tr>
+              <tr>
+                <td style="padding: 4px 0;">GST (18%):</td>
+                <td style="text-align: right; font-weight: 600;">₹${(qt.gstAmount || 73260).toLocaleString('en-IN')}</td>
+              </tr>
+              <tr style="border-top: 2px solid #0f172a; font-size: 1.1rem; font-weight: 800;">
+                <td style="padding: 8px 0;">Grand Total:</td>
+                <td style="text-align: right; color: #7c3aed;">₹${(qt.grandTotal || 480260).toLocaleString('en-IN')}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  renderJobCardHTML(comp, job) {
+    return `
+      <div class="invoice-paper">
+        <div style="border-bottom: 2px solid #0f172a; padding-bottom: 10px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+          <h2>SHOP FLOOR JOB CARD - ${job.id || 'JOB-4001'}</h2>
+          <span style="background: #2563eb; color: #fff; padding: 4px 12px; border-radius: 99px; font-weight: 700;">${job.assignedMachine || 'Corrugator Line 1'}</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 0.9rem;">
+          <div><strong>Customer:</strong> ${job.customer || 'Amazon India'}</div>
+          <div><strong>Sales Order Ref:</strong> ${job.soRef || 'SO-5001'}</div>
+          <div><strong>Box Specs:</strong> ${job.boxSpecs || '18x12x10 inch 5-Ply'}</div>
+          <div><strong>Target Quantity:</strong> ${(job.targetQty || 10000).toLocaleString()} Pcs</div>
+          <div><strong>Sheet Cut Size:</strong> ${job.sheetSize || '1575 mm x 810 mm'}</div>
+          <div><strong>Reel Width (Deckle):</strong> ${job.deckleUsed || '64 inch Reel'}</div>
+        </div>
+        <h4 style="margin-top: 25px;">Production Stage Sign-offs:</h4>
+        <table class="invoice-table">
+          <thead>
+            <tr><th>Process</th><th>Machine</th><th>Operator</th><th>Passed Qty</th><th>Scrap (Kg)</th><th>Sign</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Corrugation</td><td>Corrugator Line 1</td><td>Suresh P.</td><td>4,200</td><td>45 kg</td><td>___</td></tr>
+            <tr><td>Printing</td><td>Flexo Printer 1</td><td>Ramesh M.</td><td>4,180</td><td>12 kg</td><td>___</td></tr>
+            <tr><td>Slotting & Stitching</td><td>Stitcher 2</td><td>Vikas G.</td><td>4,150</td><td>8 kg</td><td>___</td></tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+  }
+
+  renderSalarySlipHTML(comp, emp) {
+    return `
+      <div class="invoice-paper">
+        <div style="text-align: center; border-bottom: 2px solid #0f172a; padding-bottom: 10px; margin-bottom: 20px;">
+          <h3>${comp.name}</h3>
+          <p style="font-size: 0.85rem;">SALARY PAYSLIP FOR AUGUST 2026</p>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 0.9rem;">
+          <div>
+            <p><strong>Employee Name:</strong> ${emp.name || 'Suresh Patil'}</p>
+            <p><strong>Emp ID:</strong> ${emp.id || 'EMP-101'}</p>
+            <p><strong>Designation:</strong> ${emp.designation || 'Production Manager'}</p>
+          </div>
+          <div>
+            <p><strong>Department:</strong> ${emp.dept || 'Production'}</p>
+            <p><strong>Bank A/C:</strong> XXXXXX4412</p>
+            <p><strong>PF UAN:</strong> 100988771122</p>
+          </div>
+        </div>
+        <table class="invoice-table">
+          <thead>
+            <tr><th>Earnings</th><th>Amount (₹)</th><th>Deductions</th><th>Amount (₹)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Basic Salary</td><td>₹${emp.basicSalary || 45000}</td><td>Provident Fund (PF 12%)</td><td>₹5,400</td></tr>
+            <tr><td>HRA (40%)</td><td>₹18,000</td><td>Employee State Insurance (ESI)</td><td>₹475</td></tr>
+            <tr><td>Special Allowance</td><td>₹7,000</td><td>Professional Tax (PT)</td><td>₹200</td></tr>
+            <tr style="font-weight: 700; background: #f1f5f9;">
+              <td>Total Gross Earnings</td><td>₹70,000</td><td>Total Deductions</td><td>₹6,075</td></tr>
+          </tbody>
+        </table>
+        <h3 style="text-align: right; color: #059669; margin-top: 15px;">NET PAYABLE SALARY: ₹63,925</h3>
+      </div>
+    `;
+  }
+}
+
+window.pdfGenerator = new PDFDocumentGenerator();
+
+
+/* --- END MODULE --- */
+
+/* PackFlow AI ERP - Complete 17-Module Enterprise Execution Engine */
+
+// Pure Top-Level Unbreakable Navigation Handler
+window.navigateTo = function(viewId) {
+  try {
+    const navItems = document.querySelectorAll("#sidebarNav .nav-item");
+    navItems.forEach(item => {
+      if (item.getAttribute("data-view") === viewId) {
+        item.classList.add("active");
+      } else {
+        item.classList.remove("active");
+      }
+    });
+
+    const topSelector = document.getElementById("topbarModuleSelector");
+    if (topSelector) topSelector.value = viewId;
+
+    const panels = document.querySelectorAll(".erp-view-panel");
+    let targetFound = false;
+
+    panels.forEach(panel => {
+      if (panel.id === `view-${viewId}`) {
+        panel.style.display = "block";
+        targetFound = true;
+      } else {
+        panel.style.display = "none";
+      }
+    });
+
+    if (!targetFound && panels.length > 0) {
+      const dash = document.getElementById("view-dashboard");
+      if (dash) dash.style.display = "block";
+    }
+
+    if (window.app) {
+      window.app.currentView = viewId;
+      if (typeof window.app.refreshModuleView === 'function') window.app.refreshModuleView(viewId);
+    }
+
+    try { if (typeof window.scrollTo === 'function') window.scrollTo(0, 0); } catch(e) {}
+  } catch (err) {
+    console.error("navigateTo error:", err);
+  }
+};
+
+class PackFlowApp {
+  constructor() {
+    this.currentView = "dashboard";
+    this.init();
+  }
+
+  init() {
+    try {
+      this.bindEvents();
+      this.refreshAllTables();
+      this.updateCostingCalc();
+      window.navigateTo("dashboard");
+
+      if (window.appState && typeof window.appState.subscribe === "function") {
+        window.appState.subscribe(() => {
+          this.refreshAllTables();
+        });
+      }
+    } catch (err) {
+      console.error("PackFlowApp init error:", err);
+    }
+  }
+
+  getVal(id, defaultVal) {
+    const el = document.getElementById(id);
+    return el && el.value !== "" ? parseFloat(el.value) || defaultVal : defaultVal;
+  }
+
+  getStr(id, defaultVal) {
+    const el = document.getElementById(id);
+    return el && el.value ? el.value : defaultVal;
+  }
+
+  refreshModuleView(viewId) {
+    switch (viewId) {
+      case "dashboard": this.renderDashboardWidgets(); break;
+      case "crm": this.renderCRMTable(); break;
+      case "quotations": this.renderQuotationsTable(); break;
+      case "costing": this.updateCostingCalc(); break;
+      case "sales": this.renderSalesTable(); break;
+      case "mrp": this.renderMRPBoard(); break;
+      case "inventory": this.renderInventoryTable(); break;
+      case "purchase": this.renderPurchaseTable(); break;
+      case "warehouse": this.renderWarehouseTable(); break;
+      case "accounting": this.renderAccountingView(); break;
+      case "invoices": this.renderInvoicesTable(); break;
+      case "ar": this.renderARTable(); break;
+      case "ap": this.renderAPTable(); break;
+      case "hr": this.renderHRTable(); break;
+      case "qc": this.renderQCTable(); break;
+      case "analytics": this.renderAnalyticsView(); break;
+      case "automation": this.renderAutomationTable(); break;
+      default: this.renderDashboardWidgets();
+    }
+  }
+
+  refreshAllTables() {
+    this.renderCRMTable();
+    this.renderQuotationsTable();
+    this.renderSalesTable();
+    this.renderMRPBoard();
+    this.renderInventoryTable();
+    this.renderPurchaseTable();
+    this.renderWarehouseTable();
+    this.renderInvoicesTable();
+    this.renderARTable();
+    this.renderAPTable();
+    this.renderHRTable();
+    if (typeof this.renderUsersTable === 'function') this.renderUsersTable();
+    this.renderQCTable();
+    this.renderAutomationTable();
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /* MODULE 1: EXECUTIVE DASHBOARD                                              */
+  /* -------------------------------------------------------------------------- */
+  renderDashboardWidgets() {
+    const reels = window.appState ? window.appState.getReels() : [];
+    const totalReelKg = reels.reduce((a, b) => a + (b.weightKg || 0), 0);
+    const reelValEl = document.getElementById("dashReelValue");
+    if (reelValEl) reelValEl.innerText = `${(totalReelKg / 1000).toFixed(2)} Tonnes`;
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /* MODULE 2: CRM & CUSTOMERS                                                  */
+  /* -------------------------------------------------------------------------- */
+  renderCRMTable() {
+    const tbody = document.getElementById("crmTableBody");
+    if (!tbody || !window.appState) return;
+    const customers = window.appState.getCustomers();
+
+    tbody.innerHTML = customers.map(c => `
+      <tr>
+        <td><strong>${c.id}</strong></td>
+        <td>${c.name}</td>
+        <td><span class="reel-badge">${c.gstin}</span></td>
+        <td>${c.city}</td>
+        <td>${c.contact}<br><small style="color:var(--text-muted);">${c.phone}</small></td>
+        <td>₹${(c.creditLimit || 0).toLocaleString('en-IN')}</td>
+        <td style="color:var(--accent-rose); font-weight:700;">₹${(c.outstanding || 0).toLocaleString('en-IN')}</td>
+        <td>
+          <button class="btn btn-sm btn-secondary" onclick="window.pdfGenerator ? window.pdfGenerator.generateDocument('Quotation', {customer: '${c.name}'}) : null">
+            📄 Ledger PDF
+          </button>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /* MODULE 3: AI QUOTATIONS                                                   */
+  /* -------------------------------------------------------------------------- */
+  renderQuotationsTable() {
+    const tbody = document.getElementById("quotationsTableBody");
+    if (!tbody || !window.appState) return;
+    const quotations = window.appState.getQuotations();
+
+    tbody.innerHTML = quotations.map(qt => `
+      <tr>
+        <td><strong>${qt.id}</strong></td>
+        <td>${qt.date}</td>
+        <td>${qt.customer}</td>
+        <td>${qt.boxSpecs}</td>
+        <td>${(qt.qty || 0).toLocaleString()} Pcs</td>
+        <td><strong>₹${Math.round(qt.grandTotal || qt.totalAmount || 0).toLocaleString('en-IN')}</strong></td>
+        <td><span class="status-pill ${qt.status === 'Approved' ? 'success' : 'warning'}">${qt.status}</span></td>
+        <td>
+          <div style="display:flex; gap:0.35rem;">
+            <button class="btn btn-sm btn-secondary" onclick="window.pdfGenerator ? window.pdfGenerator.generateDocument('Quotation', ${JSON.stringify(qt).replace(/"/g, '&quot;')}) : null">PDF</button>
+            ${qt.status !== 'Approved' ? `<button class="btn btn-sm btn-success" onclick="window.app.convertQuotationToSO('${qt.id}')">Convert to SO</button>` : ''}
+          </div>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  convertQuotationToSO(qtId) {
+    if (window.appState) {
+      const newSO = window.appState.convertQuotationToSO(qtId);
+      if (newSO) {
+        this.showToast(`Quotation approved & Sales Order ${newSO.id} generated!`, "success");
+        this.refreshAllTables();
+        window.navigateTo("sales");
+      }
+    }
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /* MODULE 4: CORRUGATED BOX CAD COSTING STUDIO                                */
+  /* -------------------------------------------------------------------------- */
+  updateCostingCalc() {
+    try {
+      const lengthMm = this.getVal("costLength", 300);
+      const widthMm = this.getVal("costWidth", 200);
+      const heightMm = this.getVal("costHeight", 150);
+      const ply = this.getVal("costPly", 5);
+      const fefcoStyle = this.getStr("costFefco", "FEFCO 0201");
+      const qtySlab = this.getVal("costQty", 5000);
+      const marginPercent = this.getVal("costMargin", 18);
+
+      const layers = [
+        { gsm: this.getVal("gsm0", 180), bf: this.getVal("bf0", 24) },
+        { gsm: this.getVal("gsm1", 140), bf: this.getVal("bf1", 22) },
+        { gsm: this.getVal("gsm2", 140), bf: this.getVal("bf2", 22) },
+        { gsm: this.getVal("gsm3", 140), bf: this.getVal("bf3", 22) },
+        { gsm: this.getVal("gsm4", 140), bf: this.getVal("bf4", 22) }
+      ];
+
+      const res = window.costingEngine ? window.costingEngine.calculateBoxCost({
+        lengthMm, widthMm, heightMm, ply, fefcoStyle, layers, qtySlab, marginPercent
+      }) : null;
+
+      if (window.costingEngine) {
+        const cadBox = document.getElementById("cadBoxContainer");
+        const fluteWave = document.getElementById("fluteWaveContainer");
+        if (cadBox) cadBox.innerHTML = window.costingEngine.generateBoxCADSVG(lengthMm, widthMm, heightMm, fefcoStyle);
+        if (fluteWave) fluteWave.innerHTML = window.costingEngine.generateFluteWaveSVG(ply, layers);
+      }
+
+      if (res && res.sheetSpecs) {
+        const elSheet = document.getElementById("outSheetSize");
+        const elDeckle = document.getElementById("outDeckle");
+        const elWeight = document.getElementById("outWeight");
+        const elBS = document.getElementById("outBS");
+        const elPaperCost = document.getElementById("outPaperCost");
+        const elConversion = document.getElementById("outConversion");
+        const elCostPrice = document.getElementById("outCostPrice");
+        const elSellingPrice = document.getElementById("outSellingPrice");
+        const elGrandTotal = document.getElementById("outGrandTotal");
+        const elTotalProfit = document.getElementById("outTotalProfit");
+
+        if (elSheet) elSheet.innerText = `${res.sheetSpecs.sheetLengthMm} × ${res.sheetSpecs.sheetWidthMm} mm`;
+        if (elDeckle) elDeckle.innerText = `${res.sheetSpecs.selectedDeckleInches}" Reel (${res.sheetSpecs.trimWastePercent}% trim)`;
+        if (elWeight) elWeight.innerText = `${res.weightSpecs.boxWeightKg} kg`;
+        if (elBS) elBS.innerText = `${res.weightSpecs.estimatedBurstingStrength} kg/cm²`;
+        if (elPaperCost) elPaperCost.innerText = `₹${res.costBreakdown.paperCostTotal}`;
+        if (elConversion) elConversion.innerText = `₹${res.costBreakdown.totalConversionCost}`;
+        if (elCostPrice) elCostPrice.innerText = `₹${res.costBreakdown.totalProductionCostPerBox}`;
+        if (elSellingPrice) elSellingPrice.innerText = `₹${res.costBreakdown.sellingPricePerBox}`;
+        if (elGrandTotal) elGrandTotal.innerText = `₹${res.costBreakdown.grandTotalPerBox}`;
+        if (elTotalProfit) elTotalProfit.innerText = `₹${(res.batchSummary.totalBatchProfit || 0).toLocaleString('en-IN')}`;
+      }
+    } catch (e) {
+      console.warn("Costing calc update error:", e);
+    }
+  }
+
+  convertCostingToQuotation() {
+    try {
+      const costPriceEl = document.getElementById("outCostPrice");
+      const sellPriceEl = document.getElementById("outSellingPrice");
+      const grandTotalEl = document.getElementById("outGrandTotal");
+
+      const unitPrice = sellPriceEl ? parseFloat(sellPriceEl.innerText.replace(/[^0-9.]/g, '')) || 33.75 : 33.75;
+      const grandTotalUnit = grandTotalEl ? parseFloat(grandTotalEl.innerText.replace(/[^0-9.]/g, '')) || 39.82 : 39.82;
+      const qty = this.getVal("costQty", 5000);
+      const lengthMm = this.getVal("costLength", 300);
+      const widthMm = this.getVal("costWidth", 200);
+      const heightMm = this.getVal("costHeight", 150);
+      const ply = this.getVal("costPly", 5);
+
+      const newQt = {
+        id: "QT-" + Math.floor(8000 + Math.random() * 1000),
+        date: new Date().toISOString().split('T')[0],
+        customer: "Amazon Seller Services India Pvt Ltd",
+        boxSpecs: `${lengthMm}x${widthMm}x${heightMm} mm (${ply}-Ply Box)`,
+        qty: qty,
+        unitPrice: unitPrice,
+        totalAmount: unitPrice * qty,
+        gstAmount: unitPrice * qty * 0.18,
+        grandTotal: grandTotalUnit * qty,
+        status: "Pending Approval"
+      };
+
+      if (window.appState) {
+        window.appState.addQuotation(newQt);
+      }
+
+      this.renderQuotationsTable();
+      this.showToast(`Quotation ${newQt.id} generated & added to system!`, "success");
+      window.navigateTo("quotations");
+    } catch (err) {
+      console.error("convertCostingToQuotation error:", err);
+    }
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /* MODULE 5: SALES ORDERS PIPELINE                                            */
+  /* -------------------------------------------------------------------------- */
+  renderSalesTable() {
+    const tbody = document.getElementById("salesTableBody");
+    if (!tbody || !window.appState) return;
+    const sales = window.appState.getSalesOrders();
+
+    tbody.innerHTML = sales.map(so => `
+      <tr>
+        <td><strong>${so.id}</strong></td>
+        <td>${so.date}</td>
+        <td>${so.customer}</td>
+        <td><span class="reel-badge">${so.poNumber}</span></td>
+        <td>${so.boxName}</td>
+        <td>${(so.orderQty || 0).toLocaleString()} Pcs</td>
+        <td style="color:var(--accent-amber); font-weight:700;">${(so.pendingQty || 0).toLocaleString()} Pcs</td>
+        <td><span class="status-pill ${so.status === 'Dispatched' ? 'success' : 'purple'}">${so.status}</span></td>
+      </tr>
+    `).join('');
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /* MODULE 6: PRODUCTION PLANNING & MRP SHOP FLOOR BOARD                       */
+  /* -------------------------------------------------------------------------- */
+  renderMRPBoard() {
+    const machines = window.appState ? window.appState.getMachines() : [];
+    const jobs = window.appState ? window.appState.getJobCards() : [];
+
+    const macGrid = document.getElementById("mrpMachineGrid");
+    if (macGrid) {
+      macGrid.innerHTML = machines.map(m => `
+        <div class="machine-card ${(m.status || 'idle').toLowerCase()}">
+          <div class="machine-header">
+            <span class="machine-name">${m.name}</span>
+            <button class="btn btn-sm btn-secondary" onclick="window.app.toggleMachine('${m.id}')">Toggle Status</button>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:0.8rem; color:var(--text-secondary);">Status:</span>
+            <span class="status-pill ${m.status === 'Running' ? 'success' : m.status === 'Idle' ? 'warning' : 'danger'}">${m.status}</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:0.8rem; color:var(--text-secondary);">Speed:</span>
+            <span class="machine-speed">${m.speedMpm} MPM</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:0.8rem; color:var(--text-secondary);">OEE:</span>
+            <strong style="color:var(--accent-emerald);">${m.oeePercent}%</strong>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" style="width:${m.oeePercent}%;"></div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    const tbody = document.getElementById("mrpJobTableBody");
+    if (tbody) {
+      tbody.innerHTML = jobs.map(j => `
+        <tr>
+          <td><strong>${j.id}</strong></td>
+          <td>${j.soRef}</td>
+          <td>${j.customer}</td>
+          <td>${j.sheetSize}</td>
+          <td><span class="reel-badge">${j.deckleUsed}</span></td>
+          <td>${(j.targetQty || 0).toLocaleString()} Pcs</td>
+          <td><strong>${(j.producedQty || 0).toLocaleString()} Pcs</strong></td>
+          <td><span class="status-pill ${j.status === 'Completed' ? 'success' : 'info'}">${j.status}</span></td>
+          <td>
+            <button class="btn btn-sm btn-secondary" onclick="window.pdfGenerator ? window.pdfGenerator.generateDocument('JobCard', ${JSON.stringify(j).replace(/"/g, '&quot;')}) : null">Job Card PDF</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+  }
+
+  toggleMachine(macId) {
+    if (window.appState) {
+      window.appState.toggleMachineStatus(macId);
+      this.showToast(`Machine ${macId} status updated!`, "info");
+      this.renderMRPBoard();
+    }
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /* MODULE 7: RAW PAPER INVENTORY                                              */
+  /* -------------------------------------------------------------------------- */
+  renderInventoryTable() {
+    const tbody = document.getElementById("inventoryTableBody");
+    if (!tbody || !window.appState) return;
+    const reels = window.appState.getReels();
+
+    tbody.innerHTML = reels.map(r => `
+      <tr>
+        <td><strong style="color:var(--accent-blue);">${r.id}</strong></td>
+        <td><span class="status-pill info">${r.gsm} GSM</span></td>
+        <td><span class="status-pill purple">${r.bf} BF</span></td>
+        <td><span class="reel-badge">${r.deckleWidthInches} Inches</span></td>
+        <td><strong>${(r.weightKg || 0).toLocaleString()} kg</strong></td>
+        <td>${r.supplier}</td>
+        <td>₹${r.ratePerKg} / kg</td>
+      </tr>
+    `).join('');
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /* MODULE 8: PURCHASE & VENDORS                                               */
+  /* -------------------------------------------------------------------------- */
+  renderPurchaseTable() {
+    const tbody = document.getElementById("purchaseTableBody");
+    if (!tbody || !window.appState) return;
+    const pos = window.appState.getPurchaseOrders();
+
+    tbody.innerHTML = pos.map(p => `
+      <tr>
+        <td><strong>${p.id}</strong></td>
+        <td>${p.date}</td>
+        <td>${p.vendor}</td>
+        <td>${p.items}</td>
+        <td><strong>₹${(p.amount || 0).toLocaleString('en-IN')}</strong></td>
+        <td><span class="status-pill ${p.status === 'Received' ? 'success' : 'warning'}">${p.status}</span></td>
+      </tr>
+    `).join('');
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /* MODULE 9: WAREHOUSE & DISPATCH                                             */
+  /* -------------------------------------------------------------------------- */
+  renderWarehouseTable() {
+    const tbody = document.getElementById("warehouseTableBody");
+    if (!tbody || !window.appState) return;
+    const dispatch = window.appState.getDispatchNotes();
+
+    tbody.innerHTML = dispatch.map(d => `
+      <tr>
+        <td><strong>${d.id}</strong></td>
+        <td>${d.date}</td>
+        <td>${d.customer}</td>
+        <td>${d.items}</td>
+        <td><span class="reel-badge">${d.vehicleNo}</span></td>
+        <td>${d.eWayBill}</td>
+        <td><span class="status-pill success">${d.status}</span></td>
+      </tr>
+    `).join('');
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /* MODULE 10: GST ACCOUNTING (INDIA)                                          */
+  /* -------------------------------------------------------------------------- */
+  renderAccountingView() {
+    const invoices = window.appState ? window.appState.getInvoices() : [];
+    const summary = window.accountingEngine ? window.accountingEngine.generateFinancialSummary(invoices, []) : null;
+
+    if (summary) {
+      const elRev = document.getElementById("accRevenue");
+      const elCogs = document.getElementById("accCogs");
+      const elProfit = document.getElementById("accProfit");
+      const elNet = document.getElementById("accNet");
+
+      if (elRev) elRev.innerText = `₹${(summary.revenue || 2850000).toLocaleString('en-IN')}`;
+      if (elCogs) elCogs.innerText = `₹${(summary.cogs || 1760000).toLocaleString('en-IN')}`;
+      if (elProfit) elProfit.innerText = `₹${(summary.grossProfit || 1090000).toLocaleString('en-IN')} (${summary.grossProfitMarginPercent}%)`;
+      if (elNet) elNet.innerText = `₹${(summary.netProfit || 862000).toLocaleString('en-IN')}`;
+    }
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /* MODULE 11: TAX INVOICING SYSTEM                                           */
+  /* -------------------------------------------------------------------------- */
+  renderInvoicesTable() {
+    const tbody = document.getElementById("invoicesTableBody");
+    if (!tbody || !window.appState) return;
+    const invoices = window.appState.getInvoices();
+
+    tbody.innerHTML = invoices.map(inv => `
+      <tr>
+        <td><strong>${inv.invoiceNo}</strong></td>
+        <td>${inv.date}</td>
+        <td>${inv.customer}</td>
+        <td><span class="reel-badge">${inv.gstin}</span></td>
+        <td>${inv.hsnCode}</td>
+        <td>₹${(inv.taxableValue || 0).toLocaleString('en-IN')}</td>
+        <td><strong style="color:var(--accent-emerald);">₹${(inv.totalAmount || 0).toLocaleString('en-IN')}</strong></td>
+        <td>
+          <button class="btn btn-sm btn-primary" onclick="window.pdfGenerator ? window.pdfGenerator.generateDocument('Invoice', ${JSON.stringify(inv).replace(/"/g, '&quot;')}) : null">Print GST Invoice PDF</button>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /* MODULE 12: ACCOUNTS RECEIVABLE (AR)                                       */
+  /* -------------------------------------------------------------------------- */
+  renderARTable() {
+    const tbody = document.getElementById("arTableBody");
+    if (!tbody || !window.appState) return;
+    const receipts = window.appState.getReceipts();
+
+    tbody.innerHTML = receipts.map(r => `
+      <tr>
+        <td><strong>${r.id}</strong></td>
+        <td>${r.date}</td>
+        <td>${r.customer}</td>
+        <td>${r.invoiceRef}</td>
+        <td><span class="status-pill info">${r.mode}</span></td>
+        <td><strong style="color:var(--accent-emerald);">₹${(r.amount || 0).toLocaleString('en-IN')}</strong></td>
+      </tr>
+    `).join('');
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /* MODULE 13: ACCOUNTS PAYABLE (AP)                                          */
+  /* -------------------------------------------------------------------------- */
+  renderAPTable() {
+    const tbody = document.getElementById("apTableBody");
+    if (!tbody || !window.appState) return;
+    const bills = window.appState.getVendorBills();
+
+    tbody.innerHTML = bills.map(b => `
+      <tr>
+        <td><strong>${b.id}</strong></td>
+        <td>${b.vendor}</td>
+        <td><span class="reel-badge">${b.billNo}</span></td>
+        <td>${b.date}</td>
+        <td>${b.dueDays} Days Net</td>
+        <td><strong style="color:var(--accent-amber);">₹${(b.amount || 0).toLocaleString('en-IN')}</strong></td>
+        <td><span class="status-pill ${b.status === 'Paid' ? 'success' : 'danger'}">${b.status}</span></td>
+      </tr>
+    `).join('');
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /* MODULE 14: HR & PAYROLL                                                    */
+  /* -------------------------------------------------------------------------- */
+  renderHRTable() {
+    const tbody = document.getElementById("hrTableBody");
+    if (!tbody || !window.appState) return;
+    const employees = window.appState.getEmployees();
+
+    tbody.innerHTML = employees.map(e => `
+      <tr>
+        <td><strong>${e.id}</strong></td>
+        <td>${e.name}</td>
+        <td><span class="status-pill info">${e.dept}</span></td>
+        <td>${e.designation}</td>
+        <td>${e.shift}</td>
+        <td>₹${(e.basicSalary || 0).toLocaleString('en-IN')}</td>
+        <td><span class="status-pill ${e.attendance === 'Present' ? 'success' : 'danger'}">${e.attendance}</span></td>
+        <td>
+          <button class="btn btn-sm btn-secondary" onclick="window.pdfGenerator ? window.pdfGenerator.generateDocument('SalarySlip', ${JSON.stringify(e).replace(/"/g, '&quot;')}) : null">Salary Slip PDF</button>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /* MODULE XX: SYSTEM USERS                                                    */
+  /* -------------------------------------------------------------------------- */
+  renderUsersTable() {
+    const tbody = document.getElementById("usersTableBody");
+    if (!tbody || !window.appState) return;
+    const users = window.appState.getUsers ? window.appState.getUsers() : (window.appState.state.users || []);
+
+    tbody.innerHTML = users.map(u => `
+      <tr>
+        <td><strong>${u.id}</strong></td>
+        <td>${u.name}</td>
+        <td>${u.role}</td>
+        <td>${u.email || ''}</td>
+        <td><strong>${u.avatar || ''}</strong></td>
+        <td>
+          <button class="btn btn-sm btn-secondary" onclick="window.pdfGenerator ? window.pdfGenerator.generateDocument('Quotation', {customer: '${u.name}'}) : null">Profile</button>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /* MODULE 15: QUALITY CONTROL (QC)                                            */
+  /* -------------------------------------------------------------------------- */
+  renderQCTable() {
+    const tbody = document.getElementById("qcTableBody");
+    if (!tbody || !window.appState) return;
+    const logs = window.appState.getQCLogs();
+
+    tbody.innerHTML = logs.map(q => `
+      <tr>
+        <td><strong>${q.id}</strong></td>
+        <td>${q.date}</td>
+        <td>${q.item}</td>
+        <td>${q.testedGsm} GSM</td>
+        <td><strong style="color:var(--accent-emerald);">${q.testedBf} BF</strong></td>
+        <td>${q.moisture}</td>
+        <td><span class="status-pill success">${q.status}</span></td>
+      </tr>
+    `).join('');
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /* MODULE 16: AI REPORTS & ANALYTICS                                          */
+  /* -------------------------------------------------------------------------- */
+  renderAnalyticsView() {
+    // Rendered via SVG vector charts
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /* MODULE 17: AUTOMATION RULES MATRIX                                         */
+  /* -------------------------------------------------------------------------- */
+  renderAutomationTable() {
+    const tbody = document.getElementById("automationTableBody");
+    if (!tbody || !window.appState) return;
+    const rules = window.appState.getAutomationRules();
+
+    tbody.innerHTML = rules.map(r => `
+      <tr>
+        <td><strong>${r.id}</strong></td>
+        <td>${r.name}</td>
+        <td><span class="status-pill info">${r.trigger}</span></td>
+        <td>${r.action}</td>
+        <td><span class="status-pill success">${r.status}</span></td>
+      </tr>
+    `).join('');
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /* CUSTOM HTML MODAL OVERLAYS (UNBLOCKABLE)                                   */
+  /* -------------------------------------------------------------------------- */
+  openCustomModal(title, bodyHTML, onSave) {
+    const existing = document.getElementById("customModalOverlay");
+    if (existing) existing.remove();
+
+    const overlay = document.createElement("div");
+    overlay.id = "customModalOverlay";
+    overlay.style.cssText = `
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(4px);
+      z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 1rem;
+    `;
+
+    overlay.innerHTML = `
+      <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 12px; width: 100%; max-width: 520px; box-shadow: var(--shadow-xl); overflow: hidden; animation: fadeIn 0.2s ease;">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border-color); background: var(--bg-tertiary);">
+          <h3 style="margin: 0; font-size: 1.1rem; font-weight: 700; color: var(--text-primary);">${title}</h3>
+          <button id="modalCloseX" style="background: transparent; border: none; color: var(--text-secondary); font-size: 1.5rem; cursor: pointer;">&times;</button>
+        </div>
+        <div style="padding: 1.5rem; max-height: 70vh; overflow-y: auto;">
+          ${bodyHTML}
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 0.75rem; padding: 1rem 1.5rem; border-top: 1px solid var(--border-color); background: var(--bg-tertiary);">
+          <button id="modalBtnCancel" class="btn btn-secondary">Cancel</button>
+          <button id="modalBtnSubmit" class="btn btn-primary">Save Data</button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    document.getElementById("modalCloseX").onclick = () => overlay.remove();
+    document.getElementById("modalBtnCancel").onclick = () => overlay.remove();
+    document.getElementById("modalBtnSubmit").onclick = () => {
+      try {
+        const res = onSave && typeof onSave === 'function' ? onSave() : true;
+        // if onSave explicitly returns false, keep modal open (validation failed)
+        if (res !== false) overlay.remove();
+      } catch (e) {
+        try { overlay.remove(); } catch (e) {}
+      }
+    };
+  }
+
+  showAddCustomerModal() {
+    const form = `
+      <div class="form-group"><label class="form-label">Company Name</label><input type="text" id="mCustName" class="form-control" value="Reliance Retail Logistics"></div>
+      <div class="form-group"><label class="form-label">GSTIN Number</label><input type="text" id="mCustGstin" class="form-control" value="27AAACR8899D1Z2"></div>
+      <div class="form-group"><label class="form-label">City / Location</label><input type="text" id="mCustCity" class="form-control" value="Mumbai, MH"></div>
+      <div class="form-group"><label class="form-label">Contact Person</label><input type="text" id="mCustContact" class="form-control" value="Suresh Mehta"></div>
+      <div class="form-group"><label class="form-label">Mobile Phone</label><input type="text" id="mCustPhone" class="form-control" value="+91 98990 11223"></div>
+      <div class="form-group"><label class="form-label">Credit Limit (INR)</label><input type="number" id="mCustCredit" class="form-control" value="2500000"></div>
+    `;
+    this.openCustomModal("Add New Customer Master", form, () => {
+      const name = document.getElementById("mCustName").value;
+      const gstin = document.getElementById("mCustGstin").value;
+      const city = document.getElementById("mCustCity").value;
+      const contact = document.getElementById("mCustContact").value;
+      const phone = document.getElementById("mCustPhone").value;
+      const creditLimit = parseFloat(document.getElementById("mCustCredit").value) || 2000000;
+
+      if (window.appState) {
+        window.appState.addCustomer({
+          name, gstin, pan: gstin ? gstin.substring(2, 12) : "AAACP1234F",
+          city, contact, phone, email: "info@" + name.toLowerCase().replace(/[^a-z]/g, '') + ".com",
+          creditLimit, outstanding: 0, paymentTerms: "30 Days Net"
+        });
+      }
+      this.showToast(`Customer ${name} added successfully!`, "success");
+      this.renderCRMTable();
+      window.navigateTo("crm");
+    });
+  }
+
+  showAddReelModal() {
+    const form = `
+      <div class="form-group"><label class="form-label">Paper GSM</label><input type="number" id="mReelGsm" class="form-control" value="180"></div>
+      <div class="form-group"><label class="form-label">Burst Factor (BF)</label><input type="number" id="mReelBf" class="form-control" value="24"></div>
+      <div class="form-group"><label class="form-label">Deckle Width (Inches)</label><input type="number" id="mReelWidth" class="form-control" value="52"></div>
+      <div class="form-group"><label class="form-label">Net Reel Weight (Kg)</label><input type="number" id="mReelWeight" class="form-control" value="1200"></div>
+      <div class="form-group"><label class="form-label">Paper Mill Supplier</label><input type="text" id="mReelSupplier" class="form-control" value="West Coast Paper Mills"></div>
+    `;
+    this.openCustomModal("Add Kraft Paper Reel Stock", form, () => {
+      const gsm = parseFloat(document.getElementById("mReelGsm").value) || 180;
+      const bf = parseFloat(document.getElementById("mReelBf").value) || 24;
+      const widthInches = parseFloat(document.getElementById("mReelWidth").value) || 52;
+      const weightKg = parseFloat(document.getElementById("mReelWeight").value) || 1200;
+      const supplier = document.getElementById("mReelSupplier").value;
+
+      if (window.appState) {
+        window.appState.addReel({
+          gsm, bf, deckleWidthInches: widthInches, weightKg,
+          warehouse: "Raw Paper Yard A", supplier, ratePerKg: 38
+        });
+      }
+      this.showToast(`Kraft Reel added to stock inventory!`, "success");
+      this.renderInventoryTable();
+      window.navigateTo("inventory");
+    });
+  }
+
+  showAddPOModal() {
+    const form = `
+      <div class="form-group"><label class="form-label">Vendor Name</label><input type="text" id="mPoVendor" class="form-control" value="ITC Paperboards Ltd"></div>
+      <div class="form-group"><label class="form-label">Items Description</label><input type="text" id="mPoItems" class="form-control" value="Kraft Paper Reel 180GSM 24BF (5 Tonnes)"></div>
+      <div class="form-group"><label class="form-label">Total Value (INR)</label><input type="number" id="mPoAmount" class="form-control" value="190000"></div>
+    `;
+    this.openCustomModal("Create Purchase Order", form, () => {
+      const vendor = document.getElementById("mPoVendor").value;
+      const items = document.getElementById("mPoItems").value;
+      const amount = parseFloat(document.getElementById("mPoAmount").value) || 190000;
+
+      if (window.appState) {
+        window.appState.addPurchaseOrder({
+          date: new Date().toISOString().split('T')[0],
+          vendor, items, amount, status: "Ordered"
+        });
+      }
+      this.showToast(`Purchase Order created successfully!`, "success");
+      this.renderPurchaseTable();
+      window.navigateTo("purchase");
+    });
+  }
+
+  showAddReceiptModal() {
+    const form = `
+      <div class="form-group"><label class="form-label">Customer Name</label><input type="text" id="mRctCust" class="form-control" value="Amazon Seller Services India Pvt Ltd"></div>
+      <div class="form-group"><label class="form-label">Invoice Reference</label><input type="text" id="mRctInv" class="form-control" value="INV-2026-0089"></div>
+      <div class="form-group"><label class="form-label">Amount Received (INR)</label><input type="number" id="mRctAmount" class="form-control" value="150000"></div>
+      <div class="form-group"><label class="form-label">Payment Mode</label><input type="text" id="mRctMode" class="form-control" value="NEFT Bank Transfer"></div>
+    `;
+    this.openCustomModal("Record Payment Collection", form, () => {
+      const customer = document.getElementById("mRctCust").value;
+      const invoiceRef = document.getElementById("mRctInv").value;
+      const amount = parseFloat(document.getElementById("mRctAmount").value) || 150000;
+      const mode = document.getElementById("mRctMode").value;
+
+      if (window.appState) {
+        window.appState.addReceipt({
+          date: new Date().toISOString().split('T')[0],
+          customer, invoiceRef, amount, mode
+        });
+      }
+      this.showToast(`Payment receipt recorded & ledger updated!`, "success");
+      this.renderARTable();
+      window.navigateTo("ar");
+    });
+  }
+
+  showAddEmployeeModal() {
+    const form = `
+      <div class="form-group"><label class="form-label">Employee Full Name</label><input type="text" id="mEmpName" class="form-control" value="Deepak Joshi"></div>
+      <div class="form-group"><label class="form-label">Department</label><input type="text" id="mEmpDept" class="form-control" value="Production"></div>
+      <div class="form-group"><label class="form-label">Designation</label><input type="text" id="mEmpDesig" class="form-control" value="Senior Machine Operator"></div>
+      <div class="form-group"><label class="form-label">Basic Monthly Salary (INR)</label><input type="number" id="mEmpSalary" class="form-control" value="35000"></div>
+    `;
+    this.openCustomModal("Add New Employee Master", form, () => {
+      const name = document.getElementById("mEmpName").value;
+      const dept = document.getElementById("mEmpDept").value;
+      const designation = document.getElementById("mEmpDesig").value;
+      const basicSalary = parseFloat(document.getElementById("mEmpSalary").value) || 35000;
+
+      if (window.appState) {
+        window.appState.addEmployee({
+          name, dept, designation, shift: "General", basicSalary, attendance: "Present"
+        });
+      }
+      this.showToast(`Employee ${name} added to payroll!`, "success");
+      this.renderHRTable();
+      window.navigateTo("hr");
+    });
+  }
+
+  showAddUserModal() {
+    // Only allow Super Admin to add system users
+    try {
+      if (window.appState && window.appState.state.currentRole !== 'Super Admin') {
+        this.showToast('Only Super Admin can create users.', 'danger');
+        return;
+      }
+    } catch (e) {}
+
+    const form = `
+      <div class="form-group"><label class="form-label">User Full Name</label><input type="text" id="mUserName" class="form-control" value="New User"></div>
+      <div class="form-group"><label class="form-label">User Code (optional)</label><input type="text" id="mUserCode" class="form-control" placeholder="U123"></div>
+      <div class="form-group"><label class="form-label">Role</label><select id="mUserRole" class="form-control"><option>User</option><option>Super Admin</option><option>Director</option><option>Accountant</option></select></div>
+      <div class="form-group"><label class="form-label">Email</label><input type="text" id="mUserEmail" class="form-control" value="user@example.com"></div>
+    `;
+
+    this.openCustomModal('Create New System User', form, () => {
+      const name = document.getElementById('mUserName').value.trim();
+      const code = document.getElementById('mUserCode').value.trim();
+      const role = document.getElementById('mUserRole').value;
+      const email = document.getElementById('mUserEmail').value.trim().toLowerCase();
+
+      if (!name || !email) {
+        this.showToast('Name and Email are required', 'danger');
+        return false;
+      }
+
+      if (window.appState) {
+        const existing = window.appState.getUsers().find(u => (u.email && u.email.toLowerCase() === email) || (code && u.id === code));
+        if (existing) {
+          this.showToast('User with this email or code already exists', 'danger');
+          return false;
+        }
+
+        window.appState.addUser({ name, id: code || undefined, role, email, avatar: (name || '').split(' ').map(n=>n[0]||'').slice(0,2).join('').toUpperCase() });
+      }
+      this.showToast(`User ${name} created!`, 'success');
+      if (typeof this.renderUsersTable === 'function') this.renderUsersTable();
+      return true;
+    });
+  }
+
+  showAddCompanyModal() {
+    // Only Super Admin can create/set company profile
+    try {
+      if (window.appState && window.appState.state.currentRole !== 'Super Admin') {
+        this.showToast('Only Super Admin can create or edit company profiles.', 'danger');
+        return;
+      }
+    } catch (e) {}
+
+    const comp = window.appState ? window.appState.state.company || {} : {};
+    const form = `
+      <div class="form-group"><label class="form-label">Company Name</label><input type="text" id="mCompName" class="form-control" value="${comp.name || ''}"></div>
+      <div class="form-group"><label class="form-label">GSTIN</label><input type="text" id="mCompGstin" class="form-control" value="${comp.gstin || ''}"></div>
+      <div class="form-group"><label class="form-label">PAN</label><input type="text" id="mCompPan" class="form-control" value="${comp.pan || ''}"></div>
+      <div class="form-group"><label class="form-label">Address</label><input type="text" id="mCompAddress" class="form-control" value="${comp.address || ''}"></div>
+      <div class="form-group"><label class="form-label">Contact Email</label><input type="text" id="mCompEmail" class="form-control" value="${comp.email || ''}"></div>
+    `;
+
+    this.openCustomModal('Create / Edit Company Profile', form, () => {
+      const name = document.getElementById('mCompName').value;
+      const gstin = document.getElementById('mCompGstin').value;
+      const pan = document.getElementById('mCompPan').value;
+      const address = document.getElementById('mCompAddress').value;
+      const email = document.getElementById('mCompEmail').value;
+
+      if (window.appState) {
+        window.appState.setCompanyProfile({ name, gstin, pan, address, email });
+      }
+      this.showToast(`Company profile saved: ${name}`, 'success');
+    });
+  }
+
+  showAddQCModal() {
+    const form = `
+      <div class="form-group"><label class="form-label">Sample Item Tested</label><input type="text" id="mQcItem" class="form-control" value="Reel #REEL-905 (ITC Paper)"></div>
+      <div class="form-group"><label class="form-label">Tested GSM</label><input type="number" id="mQcGsm" class="form-control" value="182"></div>
+      <div class="form-group"><label class="form-label">Tested Burst Factor (BF)</label><input type="number" id="mQcBf" class="form-control" value="24.5"></div>
+      <div class="form-group"><label class="form-label">Moisture %</label><input type="text" id="mQcMoisture" class="form-control" value="6.7%"></div>
+    `;
+    this.openCustomModal("Log QC Laboratory Paper Test", form, () => {
+      const item = document.getElementById("mQcItem").value;
+      const testedGsm = parseFloat(document.getElementById("mQcGsm").value) || 180;
+      const testedBf = parseFloat(document.getElementById("mQcBf").value) || 24;
+      const moisture = document.getElementById("mQcMoisture").value;
+
+      if (window.appState) {
+        window.appState.addQCLog({
+          date: new Date().toISOString().split('T')[0],
+          item, testedGsm, testedBf, moisture, status: "Passed"
+        });
+      }
+      this.showToast(`QC Test Log recorded!`, "success");
+      this.renderQCTable();
+      window.navigateTo("qc");
+    });
+  }
+
+  showAddRuleModal() {
+    const form = `
+      <div class="form-group"><label class="form-label">Automation Rule Name</label><input type="text" id="mRuleName" class="form-control" value="Auto Dispatch Invoice Creation"></div>
+      <div class="form-group"><label class="form-label">Trigger Condition</label><input type="text" id="mRuleTrigger" class="form-control" value="Dispatch Status == Delivered"></div>
+      <div class="form-group"><label class="form-label">Automated Action</label><input type="text" id="mRuleAction" class="form-control" value="Generate GST Tax Invoice & Send WhatsApp Alert"></div>
+    `;
+    this.openCustomModal("Add Automation Rule", form, () => {
+      const name = document.getElementById("mRuleName").value;
+      const trigger = document.getElementById("mRuleTrigger").value;
+      const action = document.getElementById("mRuleAction").value;
+
+      if (window.appState) {
+        window.appState.addAutomationRule({
+          name, trigger, action, status: "Active"
+        });
+      }
+      this.showToast(`Automation rule ${name} created!`, "success");
+      this.renderAutomationTable();
+      window.navigateTo("automation");
+    });
+  }
+
+  bindEvents() {
+    // Role switcher
+    const roleSelect = document.getElementById("roleSelect");
+    if (roleSelect) {
+      roleSelect.addEventListener("change", (e) => {
+        if (window.appState) window.appState.setRole(e.target.value);
+        this.showToast(`Active Role Context: ${e.target.value}`, "info");
+      });
+    }
+
+    // Plant switcher
+    const plantSelect = document.getElementById("plantSelect");
+    if (plantSelect) {
+      plantSelect.addEventListener("change", (e) => {
+        if (window.appState) window.appState.setPlant(e.target.value);
+        this.showToast(`Plant Context: ${e.target.options[e.target.selectedIndex].text}`, "info");
+      });
+    }
+
+    // AI Drawer toggle
+    const aiBtn = document.getElementById("aiTriggerBtn");
+    const aiDrawer = document.getElementById("aiDrawer");
+    const aiCloseBtn = document.getElementById("aiCloseBtn");
+    if (aiBtn && aiDrawer) aiBtn.addEventListener("click", () => aiDrawer.classList.toggle("open"));
+    if (aiCloseBtn && aiDrawer) aiCloseBtn.addEventListener("click", () => aiDrawer.classList.remove("open"));
+
+    // AI Chat Input
+    const aiSendBtn = document.getElementById("aiSendBtn");
+    const aiInput = document.getElementById("aiInput");
+    if (aiSendBtn && aiInput) {
+      const handleSend = () => {
+        const query = aiInput.value.trim();
+        if (query) {
+          this.appendChatMessage(query, "user");
+          aiInput.value = "";
+          setTimeout(() => {
+            const reply = window.boxBrainAI ? window.boxBrainAI.processQuery(query) : { text: "AI engine processing..." };
+            this.appendChatMessage(reply.text, "ai");
+            if (reply.action === "NAVIGATE_COSTING") window.navigateTo("costing");
+            if (reply.action === "NAVIGATE_INVENTORY") window.navigateTo("inventory");
+            if (reply.action === "NAVIGATE_AR") window.navigateTo("ar");
+          }, 250);
+        }
+      };
+      aiSendBtn.addEventListener("click", handleSend);
+      aiInput.addEventListener("keypress", (e) => { if (e.key === "Enter") handleSend(); });
+    }
+
+    // Global Search
+    const searchInput = document.getElementById("globalSearchInput");
+    if (searchInput) {
+      searchInput.addEventListener("input", (e) => {
+        const term = e.target.value.toLowerCase().trim();
+        if (term.length > 2) {
+          if (term.includes("cost") || term.includes("box")) window.navigateTo("costing");
+          else if (term.includes("inv") || term.includes("tax")) window.navigateTo("invoices");
+          else if (term.includes("paper") || term.includes("reel")) window.navigateTo("inventory");
+          else if (term.includes("job") || term.includes("prod")) window.navigateTo("mrp");
+        }
+      });
+    }
+
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById("mobileMenuToggle");
+    const sidebar = document.querySelector(".sidebar");
+    if (menuToggle && sidebar) {
+      menuToggle.addEventListener("click", () => sidebar.classList.toggle("open"));
+    }
+
+    // Real-Time Costing Inputs Event Listeners
+    ["costLength", "costWidth", "costHeight", "costPly", "costFefco", "costQty", "costMargin", "gsm0", "gsm1", "gsm2", "gsm3", "gsm4", "bf0", "bf1", "bf2", "bf3", "bf4"].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener("input", () => this.updateCostingCalc());
+        el.addEventListener("change", () => this.updateCostingCalc());
+      }
+    });
+
+    // Convert to Quotation Button Listener
+    const saveBtn = document.getElementById("btnSaveQuotation");
+    if (saveBtn) {
+      saveBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.convertCostingToQuotation();
+      });
+    }
+  }
+
+  appendChatMessage(messageText, sender) {
+    const chatContainer = document.getElementById("chatMessages");
+    if (chatContainer) {
+      const bubble = document.createElement("div");
+      bubble.className = `chat-bubble ${sender}`;
+      bubble.innerHTML = messageText.replace(/\n/g, "<br>");
+      chatContainer.appendChild(bubble);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+  }
+
+  showToast(msg, type = "info") {
+    const toast = document.createElement("div");
+    toast.style.cssText = `
+      position: fixed; bottom: 20px; right: 20px; z-index: 10000;
+      background: var(--bg-tertiary); color: var(--text-primary);
+      border: 1px solid var(--border-color); border-left: 4px solid ${type === 'success' ? '#10b981' : '#3b82f6'};
+      padding: 12px 20px; border-radius: 8px; font-weight: 600; box-shadow: var(--shadow-lg);
+    `;
+    toast.innerText = msg;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+  }
+}
+
+// Instantiate App
+if (document.readyState === 'loading') {
+  document.addEventListener("DOMContentLoaded", () => {
+    if (!(window.app && window.app instanceof PackFlowApp)) window.app = new PackFlowApp();
+  });
+} else {
+  if (!(window.app && window.app instanceof PackFlowApp)) window.app = new PackFlowApp();
+}
+
+
+// Auto-Bootstrap Guarantee
+(function() {
+  function startERP() {
+    try {
+      if (!(window.app && window.app instanceof PackFlowApp)) {
+        window.app = new PackFlowApp();
+      }
+      window.navigateTo("dashboard");
+    } catch (e) {
+      console.error("ERP Auto-Bootstrap Error:", e);
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", startERP);
+  } else {
+    startERP();
+  }
+})();
+  </script>
+</body>
+</html>
