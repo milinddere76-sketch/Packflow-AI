@@ -2,8 +2,7 @@ name: CI Build - Electron (Windows) & Android (APK)
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ main, master ]
+  push: {}
 
 jobs:
   build_windows:
