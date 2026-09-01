@@ -4,6 +4,9 @@ on:
   workflow_dispatch:
   push: {}
 
+permissions:
+  contents: write
+
 jobs:
   build_windows:
     name: Build Electron Windows Installer
@@ -33,6 +36,7 @@ jobs:
   build_android:
     name: Build Android APK (Capacitor)
     runs-on: ubuntu-latest
+    needs: prepare_android
     env:
       JAVA_HOME: /opt/hostedtoolcache/Java_TEMurin/jdk-11*/x64
     steps:
@@ -60,15 +64,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Initialize Capacitor (non-interactive)
-        run: |
-          npx cap init PackFlow com.packflow.erp --web-dir=.
-        shell: bash
-
-      - name: Add Android platform
-        run: |
-          npx cap add android || true
-        shell: bash
 
       - name: Copy web assets to native project
         run: npm run cap:copy
@@ -87,3 +82,38 @@ jobs:
           name: android-apk
           path: |
             android/app/build/outputs/**/*.apk
+
+  prepare_android:
+    name: Prepare Android native project and commit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Initialize Capacitor and add Android
+        run: |
+          npx cap init PackFlow com.packflow.erp --web-dir=. || true
+          npx cap add android || true
+          npm run cap:copy || true
+        shell: bash
+
+      - name: Commit android/ folder
+        env:
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add android || true
+          git commit -m "chore(ci): add Android native project [skip ci]" || echo "no android changes to commit"
+          git push origin HEAD:${BRANCH} || echo "push failed or no permission"
+        shell: bash
